@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masu — Học tiếng Nhật N5 từng ô vuông một</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FBF6EC'/%3E%3Crect x='3' y='3' width='11' height='11' fill='none' stroke='%23C23B3B' stroke-width='2'/%3E%3Crect x='18' y='3' width='11' height='11' fill='none' stroke='%233A5A8C' stroke-width='2'/%3E%3Crect x='3' y='18' width='11' height='11' fill='none' stroke='%233A5A8C' stroke-width='2'/%3E%3Crect x='18' y='18' width='11' height='11' fill='%23C23B3B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===================== TOKENS ===================== */
+:root{
+  --paper:#FBF6EC; --paper-deep:#F3ECDD;
+  --grid-line:rgba(194,59,59,0.18); --grid-line-soft:rgba(32,37,61,0.08);
+  --ink:#20253D; --ink-soft:#5B5F77; --ink-faint:#8C8FA3;
+  --seal:#C23B3B; --seal-dark:#9E2E2E; --seal-tint:#F6E2DE;
+  --indigo:#3A5A8C; --indigo-tint:#E3EAF3;
+  --bamboo:#3F7A5C; --bamboo-tint:#E2F0E8;
+  --gold:#C98A28; --gold-tint:#F8ECD4;
+  --card:#FFFFFF;
+  --shadow-sm:0 1px 3px rgba(32,37,61,.08),0 1px 2px rgba(32,37,61,.06);
+  --shadow-md:0 4px 14px rgba(32,37,61,.10);
+  --shadow-lg:0 16px 40px rgba(32,37,61,.16);
+  --r-sm:8px; --r-md:14px; --r-lg:20px;
+  --font-vn:'Be Vietnam Pro',system-ui,sans-serif;
+  --font-kana:'Zen Maru Gothic','Noto Sans JP',sans-serif;
+  --font-mono:'Space Mono','Courier New',monospace;
+  --correct:#22C55E; --correct-tint:#DCFCE7;
+  --wrong:#EF4444; --wrong-tint:#FEE2E2;
+  --combo:#F97316; --combo-tint:#FFF7ED;
+}
+html[data-theme="dark"]{
+  --paper:#1E2035; --paper-deep:#171929;
+  --grid-line:rgba(194,59,59,0.22); --grid-line-soft:rgba(255,255,255,0.07);
+  --ink:#EDE9E0; --ink-soft:#9198B0; --ink-faint:#525876;
+  --card:#272B42;
+  --shadow-sm:0 1px 4px rgba(0,0,0,.3); --shadow-md:0 4px 18px rgba(0,0,0,.4); --shadow-lg:0 16px 48px rgba(0,0,0,.6);
+  --seal-tint:rgba(194,59,59,.18); --bamboo-tint:rgba(63,122,92,.18);
+  --gold-tint:rgba(201,138,40,.18); --indigo-tint:rgba(58,90,140,.22);
+  --correct-tint:rgba(34,197,94,.14); --wrong-tint:rgba(239,68,68,.14);
+  --combo-tint:rgba(249,115,22,.14);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:var(--font-vn);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;padding-bottom:72px;transition:background .25s,color .25s;}
+button{font-family:inherit;cursor:pointer;}
+a{color:inherit;text-decoration:none;}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px;border-radius:4px;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+.grid-bg{background-image:repeating-linear-gradient(to right,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 32px),repeating-linear-gradient(to bottom,var(--grid-line) 0,var(--grid-line) 1px,transparent 1px,transparent 32px);background-color:var(--paper);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+
+/* ===================== NAVBAR ===================== */
+.navbar{position:sticky;top:0;z-index:50;background:rgba(251,246,236,.93);backdrop-filter:blur(10px);border-bottom:2px solid var(--seal);transition:background .25s;}
+html[data-theme="dark"] .navbar{background:rgba(30,32,53,.93);}
+.navbar-inner{max-width:1080px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;gap:10px;}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.brand-mark{width:30px;height:30px;}
+.brand-name{font-weight:800;font-size:21px;letter-spacing:.2px;color:var(--ink);}
+.nav-links{display:flex;gap:4px;list-style:none;margin:0;padding:0;}
+.nav-link{padding:9px 14px;border-radius:var(--r-sm);font-weight:600;font-size:14.5px;color:var(--ink-soft);border:2px solid transparent;transition:all .15s;display:block;background:none;}
+.nav-link:hover{color:var(--ink);background:var(--grid-line-soft);}
+.nav-link.active{color:var(--seal);border-color:var(--seal);background:var(--seal-tint);}
+.level-badge{font-family:var(--font-kana);font-size:12px;font-weight:700;background:var(--indigo-tint);color:var(--indigo);border:1.5px solid rgba(58,90,140,.35);border-radius:999px;padding:4px 11px;letter-spacing:.5px;flex-shrink:0;transition:all .4s ease;white-space:nowrap;}
+.icon-btn{background:none;border:2px solid var(--grid-line-soft);border-radius:var(--r-sm);color:var(--ink-soft);padding:6px 9px;font-size:16px;transition:all .15s;line-height:1;}
+.icon-btn:hover{background:var(--grid-line-soft);color:var(--ink);}
+.stats-group{display:flex;gap:7px;align-items:center;flex-shrink:0;}
+.stat-chip{display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:999px;font-family:var(--font-mono);font-weight:700;font-size:13px;border:2px solid var(--grid-line-soft);}
+.stat-chip.streak{background:var(--seal-tint);color:var(--seal-dark);border-color:rgba(194,59,59,.25);}
+.stat-chip.xp{background:var(--gold-tint);color:#8A6310;border-color:rgba(201,138,40,.3);}
+.tabbar{display:none;}
+@media(max-width:680px){
+  .nav-links,.level-badge{display:none;}
+  .icon-btn{display:none;}
+  .tabbar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--paper);border-top:2px solid var(--seal);height:64px;justify-content:space-around;align-items:center;}
+  .tabbar-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9.5px;font-weight:600;color:var(--ink-faint);background:none;border:none;padding:6px 4px;border-radius:var(--r-sm);flex:1;min-width:0;}
+  .tabbar-item .ic{font-size:20px;}
+  .tabbar-item.active{color:var(--seal);}
+}
+
+/* ===================== VIEWS ===================== */
+.view{display:none;}
+.view.active{display:block;}
+
+/* ===================== HERO ===================== */
+.hero{padding:56px 0 48px;position:relative;overflow:hidden;}
+.hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-particle{position:absolute;font-family:var(--font-kana);color:var(--seal);user-select:none;animation:particleFloat linear infinite;}
+@keyframes particleFloat{
+  0%,100%{transform:translateY(0) rotate(-8deg);opacity:0;}
+  20%{opacity:.07;}
+  50%{transform:translateY(-28px) rotate(8deg);opacity:.05;}
+  80%{opacity:.07;}
+}
+html[data-theme="dark"] .hero-particle{color:#6B93D6;}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;position:relative;z-index:1;}
+@media(max-width:780px){.hero-grid{grid-template-columns:1fr;} .hero-stamp-col{order:-1;justify-content:center;}}
+.eyebrow{font-family:var(--font-mono);font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--seal-dark);font-weight:700;margin:0 0 14px;}
+.hero h1{font-weight:800;font-size:44px;line-height:1.15;margin:0 0 18px;color:var(--ink);letter-spacing:-.5px;}
+.hero h1 .accent{color:var(--seal);}
+@media(max-width:560px){.hero h1{font-size:32px;}}
+.hero p.lead{font-size:17px;line-height:1.65;color:var(--ink-soft);margin:0 0 28px;max-width:480px;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* ===================== BUTTONS ===================== */
+.btn{font-weight:700;font-size:15px;padding:13px 24px;border-radius:var(--r-sm);border:2px solid;transition:transform .12s,box-shadow .12s,background .15s;display:inline-flex;align-items:center;gap:8px;}
+.btn:active{transform:translateY(2px) scale(.98)!important;}
+.btn-primary{background:var(--seal);color:#fff;border-color:var(--seal);box-shadow:var(--shadow-sm),0 4px 0 var(--seal-dark);}
+.btn-primary:hover{background:var(--seal-dark);border-color:var(--seal-dark);transform:translateY(-1px);box-shadow:var(--shadow-md),0 5px 0 #7E2323;}
+.btn-primary:active{box-shadow:none!important;}
+.btn-secondary{background:var(--card);color:var(--ink);border-color:var(--ink);box-shadow:var(--shadow-sm),0 4px 0 rgba(32,37,61,.2);}
+.btn-secondary:hover{transform:translateY(-1px);box-shadow:var(--shadow-md),0 5px 0 rgba(32,37,61,.2);}
+.btn-secondary:active{box-shadow:none!important;}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--indigo);padding:13px 10px;}
+.btn-ghost:hover{text-decoration:underline;}
+.btn-outline{background:transparent;border-color:var(--grid-line-soft);color:var(--ink-soft);}
+.btn-outline:hover{border-color:var(--ink-soft);color:var(--ink);background:var(--grid-line-soft);}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;transform:none!important;}
+.btn-block{width:100%;justify-content:center;}
+
+/* ===================== HERO STAMP ===================== */
+.hero-stamp-col{display:flex;}
+.hero-stamp-wrap{position:relative;width:168px;height:168px;}
+.hero-stamp{width:100%;height:100%;border-radius:var(--r-md);border:3px solid var(--seal);background:var(--card);display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:var(--shadow-lg);}
+.hero-stamp::before,.hero-stamp::after{content:'';position:absolute;width:14px;height:14px;border-color:var(--seal);}
+.hero-stamp::before{top:-3px;left:-3px;border-top:3px solid;border-left:3px solid;}
+.hero-stamp::after{bottom:-3px;right:-3px;border-bottom:3px solid;border-right:3px solid;}
+.hero-stamp-char{font-family:var(--font-kana);font-size:96px;color:var(--seal);line-height:1;}
+.hero-stamp-ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--seal);opacity:0;}
+@media(prefers-reduced-motion:no-preference){
+  .hero-stamp{animation:stampDown .8s cubic-bezier(.2,.9,.3,1.1) both;}
+  .hero-stamp-ring{animation:inkSpread .8s ease-out .35s both;}
+}
+@keyframes stampDown{0%{transform:translateY(-36px) scale(1.25) rotate(-9deg);opacity:0;}62%{transform:translateY(3px) scale(.96) rotate(2deg);opacity:1;}82%{transform:translateY(-2px) scale(1.02) rotate(-1deg);}100%{transform:translateY(0) scale(1) rotate(0);}}
+@keyframes inkSpread{0%{transform:scale(.5);opacity:.55;}100%{transform:scale(1.9);opacity:0;}}
+
+/* ===================== HOME STATS ===================== */
+.section{padding:40px 0;}
+.section-title{font-weight:800;font-size:25px;margin:0 0 6px;}
+.section-sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 26px;}
+.home-overview{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:28px;}
+@media(max-width:680px){.home-overview{grid-template-columns:1fr;}}
+.stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:680px){.stat-cards{grid-template-columns:1fr;}}
+.stat-card{background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s;}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;border-radius:0 0 var(--r-md) var(--r-md);}
+.stat-card.streak-card::after{background:linear-gradient(to right,#FF4500,#FF8C00,#FFD700);}
+.stat-card.xp-card::after{background:linear-gradient(to right,var(--gold),#F5C842);}
+.stat-card.mastered-card::after{background:linear-gradient(to right,var(--indigo),#6B93D6);}
+.stat-card .card-ic{font-size:24px;margin-bottom:8px;}
+.stat-card .big{font-family:var(--font-mono);font-weight:700;font-size:26px;line-height:1;}
+.stat-card .lbl{font-size:12px;color:var(--ink-soft);margin-top:4px;font-weight:600;}
+
+/* Daily Ring */
+.daily-ring-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+.ring-container{position:relative;width:90px;height:90px;}
+.ring-svg{width:90px;height:90px;}
+.ring-bg{fill:none;stroke:var(--grid-line-soft);stroke-width:8;}
+.ring-fill{fill:none;stroke:var(--seal);stroke-width:8;stroke-linecap:round;stroke-dasharray:232.5;stroke-dashoffset:232.5;transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ring-num{font-family:var(--font-mono);font-weight:700;font-size:17px;color:var(--seal);}
+.ring-goal{font-size:9px;color:var(--ink-faint);font-weight:600;}
+.daily-label{font-size:11.5px;color:var(--ink-soft);font-weight:600;text-align:center;line-height:1.4;}
+
+/* Mastery bars */
+.mastery-row{display:flex;flex-direction:column;gap:16px;}
+.mastery-item{display:grid;grid-template-columns:110px 1fr 52px;gap:14px;align-items:center;}
+@media(max-width:560px){.mastery-item{grid-template-columns:86px 1fr 48px;}}
+.mastery-label{font-weight:700;font-size:14px;}
+.masu-bar{display:flex;gap:4px;}
+.masu-bar .sq{flex:1;aspect-ratio:1;max-width:24px;border:2px solid var(--grid-line-soft);border-radius:3px;background:var(--paper-deep);transition:background .3s;}
+.masu-bar .sq.fill-h{background:var(--seal);border-color:var(--seal);}
+.masu-bar .sq.fill-k{background:var(--indigo);border-color:var(--indigo);}
+.mastery-pct{font-family:var(--font-mono);font-weight:700;text-align:right;font-size:13px;color:var(--ink-soft);}
+
+/* ===================== PATH ===================== */
+.path-list{position:relative;max-width:560px;margin:0 auto;padding-left:8px;}
+.path-list::before{content:'';position:absolute;left:33px;top:10px;bottom:10px;width:0;border-left:3px dashed var(--grid-line);z-index:0;}
+.path-node{position:relative;z-index:1;display:flex;gap:18px;align-items:flex-start;padding:16px 4px;border-radius:var(--r-md);background:none;border:none;width:100%;text-align:left;transition:background .15s;}
+.path-node:hover{background:rgba(32,37,61,.04);}
+html[data-theme="dark"] .path-node:hover{background:rgba(255,255,255,.04);}
+.path-seal{flex-shrink:0;width:60px;height:60px;border-radius:50%;border:3px solid var(--seal);background:var(--card);display:flex;align-items:center;justify-content:center;font-family:var(--font-kana);font-size:24px;color:var(--seal);box-shadow:var(--shadow-sm);}
+.path-node.done .path-seal{background:var(--bamboo);border-color:var(--bamboo);color:#fff;}
+.path-node.locked .path-seal{border-color:var(--ink-faint);color:var(--ink-faint);background:var(--paper-deep);}
+.path-info{padding-top:4px;flex:1;}
+.path-info .pn-title{font-weight:700;font-size:16px;margin-bottom:3px;}
+.path-info .pn-sub{font-size:13px;color:var(--ink-soft);}
+.path-node.locked .pn-title,.path-node.locked .pn-sub{color:var(--ink-faint);}
+.pn-mini-bar{height:5px;background:var(--grid-line-soft);border-radius:999px;margin-top:9px;overflow:hidden;}
+.pn-mini-fill{height:100%;border-radius:999px;background:var(--seal);transition:width .6s ease;}
+.path-node.done .pn-mini-fill{background:var(--bamboo);}
+.pn-badge{display:inline-block;margin-top:6px;font-family:var(--font-mono);font-size:11px;padding:2px 9px;border-radius:999px;}
+.pn-badge.done{background:var(--bamboo-tint);color:var(--bamboo);}
+.pn-badge.locked{background:var(--grid-line-soft);color:var(--ink-faint);}
+
+/* ===================== FEATURES ===================== */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:780px){.features{grid-template-columns:1fr;}}
+.feature{padding:20px 22px;background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-md);box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s;}
+.feature:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.feature .ic{font-size:28px;margin-bottom:12px;}
+.feature h3{font-size:16px;margin:0 0 8px;font-weight:700;}
+.feature p{font-size:14px;color:var(--ink-soft);line-height:1.55;margin:0;}
+footer{text-align:center;padding:30px 20px 50px;color:var(--ink-faint);font-size:13px;}
+
+/* ===================== ALPHABET ===================== */
+.view-header{padding:36px 0 8px;}
+.controls-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:26px;}
+.seg{display:inline-flex;background:var(--paper-deep);border-radius:999px;padding:4px;gap:2px;border:2px solid var(--grid-line-soft);}
+.seg button{border:none;background:none;padding:8px 18px;border-radius:999px;font-weight:700;font-size:14px;color:var(--ink-soft);transition:all .15s;}
+.seg button.active{background:var(--ink);color:var(--paper);}
+html[data-theme="dark"] .seg button.active{background:var(--ink);color:var(--paper);}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{border:2px solid var(--grid-line-soft);background:var(--card);padding:7px 14px;border-radius:999px;font-weight:600;font-size:13.5px;color:var(--ink-soft);transition:all .15s;}
+.chip.active{border-color:var(--seal);color:var(--seal-dark);background:var(--seal-tint);}
+.kana-grid-wrap{overflow-x:auto;padding-bottom:8px;}
+.kana-grid{display:grid;grid-template-columns:48px repeat(5,minmax(64px,1fr));gap:8px;min-width:480px;}
+.kana-row-label{display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:700;color:var(--ink-faint);font-size:13px;}
+.kana-cell{position:relative;aspect-ratio:1;border:2px solid var(--grid-line);border-radius:var(--r-sm);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:transform .12s,box-shadow .12s,border-color .12s;}
+.kana-cell.has{cursor:pointer;}
+.kana-cell.has:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--seal);}
+.kana-cell.empty{border-style:dashed;border-color:var(--grid-line-soft);background:transparent;}
+.kana-cell .ch{font-family:var(--font-kana);font-size:30px;line-height:1;color:var(--ink);}
+.kana-cell .ro{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);}
+.kana-cell .spk{position:absolute;top:4px;right:4px;font-size:11px;opacity:.45;}
+.kana-cell .check{position:absolute;bottom:3px;left:4px;font-size:11px;color:var(--bamboo);}
+.kana-cell.stamped{animation:cellStamp .35s ease;}
+@keyframes cellStamp{0%{transform:scale(1);}40%{transform:scale(.88);}100%{transform:scale(1);}}
+.alpha-cta{margin-top:28px;display:flex;justify-content:center;}
+
+/* ===================== KANJI ===================== */
+.kanji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:10px;padding-bottom:8px;}
+.kanji-cell{position:relative;border:2px solid var(--grid-line);border-radius:var(--r-sm);background:var(--card);padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:transform .12s,box-shadow .12s,border-color .12s;min-height:118px;}
+.kanji-cell:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--indigo);}
+.kanji-cell .kj{font-family:var(--font-kana);font-size:42px;line-height:1;color:var(--ink);}
+.kanji-cell .mn{font-size:11.5px;font-weight:600;color:var(--seal-dark);text-align:center;line-height:1.3;}
+.kanji-cell .rd{font-family:var(--font-mono);font-size:10px;color:var(--ink-faint);text-align:center;line-height:1.35;}
+.kanji-cell .check{position:absolute;top:5px;left:6px;font-size:11px;color:var(--bamboo);}
+.kanji-cell .spk{position:absolute;top:5px;right:6px;font-size:11px;opacity:.45;}
+.kanji-cell.stamped{animation:cellStamp .35s ease;}
+.kanji-detail{margin-top:18px;background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--shadow-sm);display:none;}
+.kanji-detail.visible{display:block;}
+.kanji-detail-top{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+.kanji-detail-char{font-family:var(--font-kana);font-size:56px;line-height:1;color:var(--seal);}
+.kanji-detail-meta{flex:1;}
+.kanji-detail-meta h4{margin:0 0 4px;font-size:17px;}
+.kanji-detail-meta p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.kanji-detail-ex{font-size:13px;color:var(--ink-soft);padding-top:10px;border-top:1px solid var(--grid-line-soft);}
+.kanji-detail-ex strong{color:var(--ink);}
+.fc-remain{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);}
+.fc-back-extra{font-size:14px;color:rgba(251,246,236,.72);text-align:center;line-height:1.5;margin-top:-2px;max-width:280px;}
+.fc-back-ex{font-size:12px;color:rgba(251,246,236,.55);text-align:center;line-height:1.45;margin-top:2px;font-style:italic;}
+
+/* ===================== FLASHCARD ===================== */
+.fc-setup{background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow-sm);margin-bottom:10px;}
+.fc-setup h3{margin:0 0 4px;font-size:15px;font-weight:700;}
+.fc-setup .hint{font-size:13px;color:var(--ink-soft);margin:0 0 14px;}
+.fc-block{margin-bottom:18px;}
+.fc-count{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);margin-top:10px;text-align:center;}
+.fc-setup-actions{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+
+/* Session */
+.fc-session{display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px 0 10px;}
+.fc-session-top{width:100%;max-width:440px;display:flex;align-items:center;gap:12px;}
+.fc-progress-wrap{flex:1;}
+.fc-progress-bar{height:12px;border-radius:999px;background:var(--grid-line-soft);overflow:hidden;}
+.fc-progress-fill{height:100%;background:linear-gradient(to right,var(--seal),var(--gold));border-radius:999px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+.fc-progress-text{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);margin-top:6px;}
+.session-timer{font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--ink-soft);background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-sm);padding:5px 10px;flex-shrink:0;}
+
+/* Combo */
+.combo-display{align-items:center;gap:8px;padding:8px 20px;background:var(--combo-tint);border:2px solid rgba(249,115,22,.35);border-radius:999px;box-shadow:var(--shadow-sm);display:none;}
+.combo-display.visible{display:flex;animation:comboAppear .35s cubic-bezier(.2,.9,.3,1.2) both;}
+@keyframes comboAppear{from{transform:scale(.4) translateY(8px);opacity:0;}to{transform:scale(1);opacity:1;}}
+.combo-pulse{animation:comboPop .35s ease!important;}
+@keyframes comboPop{0%{transform:scale(1);}40%{transform:scale(1.14);}100%{transform:scale(1);}}
+.combo-badge{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--combo);letter-spacing:.5px;}
+
+/* Card */
+.fc-card-scene{width:100%;max-width:360px;height:320px;perspective:1200px;}
+.fc-card{width:100%;height:100%;position:relative;transition:transform .55s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;cursor:pointer;}
+.fc-card.flipped{transform:rotateY(180deg);}
+.fc-card.fc-correct{animation:cardBounce .42s ease;}
+.fc-card.fc-wrong{animation:cardShake .52s ease;}
+@keyframes cardBounce{0%{transform:scale(1);}30%{transform:scale(1.05) translateY(-5px);}65%{transform:scale(.98) translateY(2px);}100%{transform:scale(1);}}
+@keyframes cardShake{0%{transform:translateX(0);}15%{transform:translateX(-11px);}35%{transform:translateX(11px);}55%{transform:translateX(-8px);}75%{transform:translateX(7px);}90%{transform:translateX(-3px);}100%{transform:translateX(0);}}
+.fc-face{position:absolute;inset:0;border-radius:var(--r-lg);backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:3px solid var(--ink);box-shadow:var(--shadow-lg);padding:24px;transition:box-shadow .25s;}
+.fc-face.front{background:var(--card);}
+.fc-face.front::before,.fc-face.front::after{content:'';position:absolute;width:20px;height:20px;border-color:var(--seal);}
+.fc-face.front::before{top:13px;left:13px;border-top:3px solid;border-left:3px solid;}
+.fc-face.front::after{bottom:13px;right:13px;border-bottom:3px solid;border-right:3px solid;}
+.fc-face.back{background:var(--ink);color:var(--paper);transform:rotateY(180deg);}
+.fc-card.fc-correct .fc-face.front,.fc-card.flipped.fc-correct .fc-face.back{box-shadow:0 0 0 4px var(--correct),var(--shadow-lg);}
+.fc-card.fc-wrong .fc-face.front,.fc-card.flipped.fc-wrong .fc-face.back{box-shadow:0 0 0 4px var(--wrong),var(--shadow-lg);}
+.fc-tag{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.5px;opacity:.6;text-transform:uppercase;}
+.fc-big{font-family:var(--font-kana);font-size:88px;line-height:1;color:var(--seal);}
+.fc-face.back .fc-big{font-family:var(--font-mono);font-size:46px;color:var(--paper);}
+.fc-hint-flip{font-size:12.5px;color:var(--ink-faint);}
+.fc-face.back .fc-hint-flip{color:rgba(251,246,236,.5);}
+.fc-actions{display:flex;gap:14px;width:100%;max-width:360px;}
+.fc-act{flex:1;padding:16px 10px;border-radius:var(--r-md);font-weight:700;font-size:15px;border:2px solid;display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform .12s,box-shadow .12s;}
+.fc-act:not(:disabled):hover{transform:translateY(-2px);}
+.fc-act:active:not(:disabled){transform:scale(.97) translateY(1px);}
+.fc-act:disabled{opacity:.35;cursor:not-allowed;}
+.fc-act.no{background:var(--card);border-color:var(--seal);color:var(--seal-dark);box-shadow:var(--shadow-sm),0 4px 0 rgba(194,59,59,.3);}
+.fc-act.no:hover:not(:disabled){background:var(--seal-tint);box-shadow:var(--shadow-md),0 5px 0 rgba(194,59,59,.3);}
+.fc-act.yes{background:var(--bamboo);border-color:var(--bamboo);color:#fff;box-shadow:var(--shadow-sm),0 4px 0 #2D5C43;}
+.fc-act.yes:hover:not(:disabled){background:#346a4e;box-shadow:var(--shadow-md),0 5px 0 #2D5C43;}
+.fc-act .sub{font-family:var(--font-mono);font-size:10px;font-weight:400;opacity:.7;}
+
+/* XP Float */
+.xp-floaters{position:fixed;inset:0;pointer-events:none;z-index:300;}
+.xp-float{position:fixed;font-family:var(--font-mono);font-weight:700;font-size:17px;color:var(--gold);text-shadow:0 2px 8px rgba(0,0,0,.2);animation:xpUp 1.1s ease forwards;pointer-events:none;white-space:nowrap;transform:translateX(-50%);}
+@keyframes xpUp{0%{transform:translateX(-50%) translateY(0) scale(1);opacity:1;}60%{transform:translateX(-50%) translateY(-56px) scale(1.1);opacity:1;}100%{transform:translateX(-50%) translateY(-96px) scale(.9);opacity:0;}}
+
+/* ===================== SUMMARY ===================== */
+.fc-summary{text-align:center;max-width:440px;margin:0 auto;padding:32px 0;}
+.sum-stars{font-size:40px;margin:0 0 8px;letter-spacing:5px;}
+.fc-summary h2{font-size:24px;margin:0 0 6px;}
+.sum-accuracy{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);margin:0 0 22px;background:var(--grid-line-soft);border-radius:999px;padding:4px 16px;display:inline-block;}
+.fc-sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.fc-sum-card{background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-md);padding:16px;position:relative;overflow:hidden;}
+.fc-sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.fc-sum-card.s-known::before{background:var(--bamboo);}
+.fc-sum-card.s-unknown::before{background:var(--seal);}
+.fc-sum-card.s-xp::before{background:var(--gold);}
+.fc-sum-card.s-total::before{background:var(--indigo);}
+.fc-sum-card .n{font-family:var(--font-mono);font-weight:700;font-size:24px;}
+.fc-sum-card .l{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.fc-sum-actions{display:flex;flex-direction:column;gap:10px;}
+
+/* Toast */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:150;background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:var(--r-md);font-size:14px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;transition:all .25s;pointer-events:none;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.achievement{background:linear-gradient(135deg,var(--indigo),#5B7FBB);border:1.5px solid rgba(255,255,255,.2);border-radius:var(--r-lg);padding:14px 22px;}
+@media(min-width:681px){.toast{bottom:24px;}}
+
+/* Confetti */
+#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:400;width:100vw;height:100vh;}
+
+/* ===================== QUIZ ===================== */
+.quiz-setup{background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow-sm);margin-bottom:10px;}
+.quiz-setup h3{margin:0 0 4px;font-size:15px;font-weight:700;}
+.quiz-setup .hint{font-size:13px;color:var(--ink-soft);margin:0 0 14px;}
+.quiz-block{margin-bottom:18px;}
+.quiz-count{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);margin-top:10px;text-align:center;}
+.quiz-setup-actions{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.quiz-session{padding:12px 0 20px;max-width:520px;margin:0 auto;}
+.quiz-session-top{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.quiz-stats-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;justify-content:center;}
+.quiz-stat-chip{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;font-family:var(--font-mono);font-weight:700;font-size:13px;border:2px solid var(--grid-line-soft);background:var(--card);}
+.quiz-stat-chip.score{color:var(--bamboo);border-color:rgba(63,122,92,.3);background:var(--bamboo-tint);}
+.quiz-stat-chip.streak{color:var(--combo);border-color:rgba(249,115,22,.35);background:var(--combo-tint);}
+.quiz-stat-chip.streak.hot{animation:comboPop .35s ease;}
+.quiz-question-card{background:var(--card);border:3px solid var(--ink);border-radius:var(--r-lg);padding:28px 24px 22px;box-shadow:var(--shadow-lg);text-align:center;margin-bottom:18px;position:relative;transition:transform .25s,box-shadow .25s;}
+.quiz-question-card::before,.quiz-question-card::after{content:'';position:absolute;width:18px;height:18px;border-color:var(--seal);}
+.quiz-question-card::before{top:12px;left:12px;border-top:3px solid;border-left:3px solid;}
+.quiz-question-card::after{bottom:12px;right:12px;border-bottom:3px solid;border-right:3px solid;}
+.quiz-question-card.q-correct{box-shadow:0 0 0 4px var(--correct),var(--shadow-lg);animation:cardBounce .42s ease;}
+.quiz-question-card.q-wrong{box-shadow:0 0 0 4px var(--wrong),var(--shadow-lg);animation:cardShake .52s ease;}
+.quiz-q-tag{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+.quiz-q-prompt{font-family:var(--font-kana);font-size:72px;line-height:1.1;color:var(--seal);margin-bottom:8px;word-break:break-word;}
+.quiz-q-prompt.text-prompt{font-family:var(--font-vn);font-size:28px;color:var(--ink);line-height:1.35;}
+.quiz-q-prompt.mono-prompt{font-family:var(--font-mono);font-size:36px;color:var(--indigo);}
+.quiz-q-sub{font-size:13.5px;color:var(--ink-soft);margin:0;}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:480px){.quiz-options{grid-template-columns:1fr;}}
+.quiz-opt{padding:16px 14px;border-radius:var(--r-md);font-weight:700;font-size:15px;border:2px solid var(--grid-line-soft);background:var(--card);color:var(--ink);text-align:left;transition:transform .12s,border-color .15s,background .15s,box-shadow .15s;line-height:1.35;min-height:56px;display:flex;align-items:center;gap:8px;}
+.quiz-opt .opt-key{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);flex-shrink:0;width:22px;height:22px;border-radius:6px;border:1.5px solid var(--grid-line-soft);display:flex;align-items:center;justify-content:center;}
+.quiz-opt:not(:disabled):hover{transform:translateY(-2px);border-color:var(--indigo);box-shadow:var(--shadow-sm);}
+.quiz-opt:not(:disabled):active{transform:scale(.98);}
+.quiz-opt:disabled{cursor:default;}
+.quiz-opt.correct{border-color:var(--correct);background:var(--correct-tint);color:#166534;}
+html[data-theme="dark"] .quiz-opt.correct{color:#86EFAC;}
+.quiz-opt.wrong{border-color:var(--wrong);background:var(--wrong-tint);color:#991B1B;}
+html[data-theme="dark"] .quiz-opt.wrong{color:#FCA5A5;}
+.quiz-opt.reveal:not(.correct):not(.wrong){opacity:.55;}
+.quiz-feedback{text-align:center;font-weight:700;font-size:15px;min-height:24px;margin-top:12px;color:var(--ink-soft);transition:opacity .2s;}
+.quiz-feedback.ok{color:var(--bamboo);}
+.quiz-feedback.bad{color:var(--seal-dark);}
+.quiz-summary{text-align:center;max-width:480px;margin:0 auto;padding:32px 0;}
+.quiz-sum-score{font-family:var(--font-mono);font-weight:800;font-size:56px;line-height:1;color:var(--seal);margin:8px 0 4px;}
+.quiz-sum-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:22px 0 24px;}
+.quiz-sum-card{background:var(--card);border:2px solid var(--grid-line-soft);border-radius:var(--r-md);padding:16px;position:relative;overflow:hidden;}
+.quiz-sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.quiz-sum-card.s-correct::before{background:var(--bamboo);}
+.quiz-sum-card.s-streak::before{background:var(--combo);}
+.quiz-sum-card.s-xp::before{background:var(--gold);}
+.quiz-sum-card.s-best::before{background:var(--indigo);}
+.quiz-sum-card .n{font-family:var(--font-mono);font-weight:700;font-size:24px;}
+.quiz-sum-card .l{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.quiz-history{font-size:13px;color:var(--ink-soft);margin-top:6px;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32">
+        <rect x="2" y="2" width="12" height="12" fill="none" stroke="#C23B3B" stroke-width="2.5"/>
+        <rect x="18" y="2" width="12" height="12" fill="none" stroke="#3A5A8C" stroke-width="2.5"/>
+        <rect x="2" y="18" width="12" height="12" fill="none" stroke="#3A5A8C" stroke-width="2.5"/>
+        <rect x="18" y="18" width="12" height="12" fill="#C23B3B"/>
+      </svg>
+      <span class="brand-name">Masu</span>
+    </div>
+    <ul class="nav-links">
+      <li><button class="nav-link" data-nav="home">Trang chủ</button></li>
+      <li><button class="nav-link" data-nav="alphabet">Bảng chữ cái</button></li>
+      <li><button class="nav-link" data-nav="kanji">Kanji N5</button></li>
+      <li><button class="nav-link" data-nav="flashcard">Flashcard</button></li>
+      <li><button class="nav-link" data-nav="quiz">Trắc nghiệm</button></li>
+    </ul>
+    <div id="navLevel" class="level-badge">初心者</div>
+    <div class="stats-group">
+      <button class="icon-btn" id="soundToggle" title="Âm thanh">🔇</button>
+      <button class="icon-btn" id="darkToggle" title="Giao diện tối">🌙</button>
+      <span class="stat-chip streak" title="Streak">🔥 <span id="navStreak">0</span></span>
+      <span class="stat-chip xp" title="XP">⭐ <span id="navXp">0</span></span>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section class="view active" id="view-home">
+    <div class="hero grid-bg">
+      <div class="hero-particles" id="heroParticles"></div>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">JLPT N5 · Hiragana &amp; Katakana</p>
+            <h1>Học tiếng Nhật<br><span class="accent">từng ô vuông</span> một.</h1>
+            <p class="lead">Masu giúp bạn làm chủ bảng chữ cái tiếng Nhật trước khi bước vào N5 — đúng bảng chữ cái, đúng cách đọc, ôn lại đúng lúc bạn sắp quên.</p>
+            <div class="hero-ctas">
+              <button class="btn btn-primary" data-nav="alphabet">あ Bắt đầu với bảng chữ cái</button>
+              <button class="btn btn-secondary" data-nav="kanji">漢 Kanji N5</button>
+              <button class="btn btn-secondary" data-nav="flashcard">🎴 Luyện Flashcard</button>
+              <button class="btn btn-secondary" data-nav="quiz">✅ Trắc nghiệm</button>
+            </div>
+          </div>
+          <div class="hero-stamp-col">
+            <div class="hero-stamp-wrap">
+              <div class="hero-stamp-ring"></div>
+              <div class="hero-stamp"><span class="hero-stamp-char" lang="ja">あ</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="section">
+        <h2 class="section-title">Tổng quan của bạn</h2>
+        <p class="section-sub">Cập nhật theo tiến độ luyện flashcard trên thiết bị này.</p>
+        <div class="home-overview">
+          <div>
+            <div class="stat-cards">
+              <div class="stat-card streak-card">
+                <div class="card-ic">🔥</div>
+                <div class="big" id="homeStreak">0</div>
+                <div class="lbl">Ngày liên tiếp</div>
+              </div>
+              <div class="stat-card xp-card">
+                <div class="card-ic">⭐</div>
+                <div class="big" id="homeXp">0</div>
+                <div class="lbl">Điểm kinh nghiệm</div>
+              </div>
+              <div class="stat-card mastered-card">
+                <div class="card-ic">📚</div>
+                <div class="big" id="homeMastered">0</div>
+                <div class="lbl">Kí tự đã thuộc / <span id="homeTotalChars">202</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="daily-ring-wrap">
+            <div class="ring-container">
+              <svg class="ring-svg" viewBox="0 0 90 90">
+                <circle class="ring-bg" cx="45" cy="45" r="37"/>
+                <circle class="ring-fill" id="dailyRingFill" cx="45" cy="45" r="37" transform="rotate(-90 45 45)"/>
+              </svg>
+              <div class="ring-center">
+                <span class="ring-num" id="dailyCount">0</span>
+                <span class="ring-goal">/ 20</span>
+              </div>
+            </div>
+            <div class="daily-label">Mục tiêu<br>hôm nay</div>
+          </div>
+        </div>
+        <div class="mastery-row">
+          <div class="mastery-item">
+            <div class="mastery-label">ひらがな</div>
+            <div class="masu-bar" id="barHira"></div>
+            <div class="mastery-pct" id="pctHira">0%</div>
+          </div>
+          <div class="mastery-item">
+            <div class="mastery-label">カタカナ</div>
+            <div class="masu-bar" id="barKata"></div>
+            <div class="mastery-pct" id="pctKata">0%</div>
+          </div>
+          <div class="mastery-item">
+            <div class="mastery-label">漢字 N5</div>
+            <div class="masu-bar" id="barKanji"></div>
+            <div class="mastery-pct" id="pctKanji">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Lộ trình N5</h2>
+        <p class="section-sub">Đi theo từng chặng — mỗi con dấu là một bộ kí tự bạn cần nắm chắc.</p>
+        <div class="path-list" id="pathList"></div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Vì sao học cùng Masu</h2>
+        <div class="features">
+          <div class="feature"><div class="ic">🔁</div><h3>Lặp lại đúng lúc</h3><p>Kí tự bạn chưa nhớ sẽ tự quay lại trong buổi học, thay vì biến mất sau một lần lướt qua.</p></div>
+          <div class="feature"><div class="ic">🗺️</div><h3>Lộ trình rõ ràng</h3><p>Đi từ Hiragana cơ bản đến Katakana có dấu theo đúng thứ tự nên học trước khi vào N5.</p></div>
+          <div class="feature"><div class="ic">📊</div><h3>Theo dõi tiến độ</h3><p>Biết chính xác mình đã thuộc bao nhiêu trong 202 kí tự và kanji, không học mơ hồ.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ALPHABET ============ -->
+  <section class="view" id="view-alphabet">
+    <div class="wrap">
+      <div class="view-header">
+        <h2 class="section-title">Bảng chữ cái</h2>
+        <p class="section-sub">Chạm vào một ô để nghe cách đọc. Ô có dấu ✓ là kí tự bạn đã đánh dấu "Đã nhớ" trong Flashcard.</p>
+      </div>
+      <div class="controls-row">
+        <div class="seg" id="scriptSeg">
+          <button data-script="hira" class="active">ひらがな Hiragana</button>
+          <button data-script="kata">カタカナ Katakana</button>
+        </div>
+        <div class="chips" id="typeChips">
+          <button class="chip active" data-type="basic">Âm cơ bản</button>
+          <button class="chip" data-type="dakuten">Âm có dấu (が・ぱ)</button>
+        </div>
+      </div>
+      <div class="kana-grid-wrap">
+        <div class="kana-grid" id="kanaGrid"></div>
+      </div>
+      <div class="alpha-cta">
+        <button class="btn btn-primary" id="alphaToFc">🎴 Luyện Flashcard với bộ này</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KANJI ============ -->
+  <section class="view" id="view-kanji">
+    <div class="wrap">
+      <div class="view-header">
+        <h2 class="section-title">Kanji N5 cơ bản</h2>
+        <p class="section-sub">60 chữ Hán thường gặp nhất — chạm để nghe, xem nghĩa và từ ví dụ. Ô có ✓ là kanji bạn đã thuộc trong Flashcard.</p>
+      </div>
+      <div class="controls-row">
+        <div class="chips" id="kanjiGroupChips">
+          <button class="chip active" data-group="all">Tất cả · 60</button>
+          <button class="chip" data-group="number">Số · 14</button>
+          <button class="chip" data-group="people">Người · 7</button>
+          <button class="chip" data-group="body">Cơ thể · 5</button>
+          <button class="chip" data-group="nature">Thiên nhiên · 10</button>
+          <button class="chip" data-group="space">Vị trí · 4</button>
+          <button class="chip" data-group="size">Tính từ · 5</button>
+          <button class="chip" data-group="time">Thời gian · 5</button>
+          <button class="chip" data-group="study">Học tập · 5</button>
+          <button class="chip" data-group="verb">Động từ · 5</button>
+        </div>
+      </div>
+      <div class="kanji-grid" id="kanjiGrid"></div>
+      <div class="kanji-detail" id="kanjiDetail"></div>
+      <div class="alpha-cta">
+        <button class="btn btn-primary" id="kanjiToFc">🎴 Luyện Flashcard Kanji N5</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLASHCARD ============ -->
+  <section class="view" id="view-flashcard">
+    <div class="wrap">
+      <div class="view-header">
+        <h2 class="section-title">Flashcard</h2>
+        <p class="section-sub">Chọn bộ kí tự muốn luyện rồi bắt đầu.</p>
+      </div>
+
+      <div id="fcSetupPane">
+        <div class="fc-setup">
+          <h3>Bộ kí tự</h3>
+          <p class="hint">Chọn một hoặc nhiều bộ (có thể kết hợp Hiragana &amp; Katakana).</p>
+          <div class="chips fc-block" id="fcSetChips">
+            <button class="chip active" data-set="hira_basic">Hiragana cơ bản · 46</button>
+            <button class="chip active" data-set="hira_dakuten">Hiragana có dấu · 25</button>
+            <button class="chip" data-set="kata_basic">Katakana cơ bản · 46</button>
+            <button class="chip" data-set="kata_dakuten">Katakana có dấu · 25</button>
+            <button class="chip" data-set="kanji_n5">Kanji N5 cơ bản · 60</button>
+          </div>
+          <h3>Chiều luyện</h3>
+          <div class="seg fc-block" id="fcDirSeg" style="margin-top:8px;">
+            <button data-dir="kana2romaji" class="active">Kí tự → Cách đọc</button>
+            <button data-dir="romaji2kana">Cách đọc → Kí tự</button>
+            <button data-dir="kanji2reading" id="fcDirReading" style="display:none;">Kanji → Cách đọc</button>
+          </div>
+          <div class="fc-count" id="fcCountText">Bộ thẻ: 0 thẻ</div>
+          <div class="fc-setup-actions">
+            <button class="btn btn-primary btn-block" id="fcStartBtn">🎴 Bắt đầu luyện tập</button>
+            <button class="btn btn-outline btn-block" id="fcQuickBtn">⚡ Luyện nhanh 10 thẻ ngẫu nhiên</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="fcSessionPane" style="display:none;">
+        <div class="fc-session">
+          <div class="fc-session-top">
+            <div class="fc-progress-wrap">
+              <div class="fc-progress-bar"><div class="fc-progress-fill" id="fcProgressFill" style="width:0%"></div></div>
+              <div class="fc-progress-text"><span id="fcProgressLabel">0 / 0</span><span><span class="fc-remain" id="fcRemainLabel"></span> · <span id="fcSessionXp">+0 XP</span></span></div>
+            </div>
+            <div class="session-timer" id="sessionTimer">0:00</div>
+          </div>
+          <div class="combo-display" id="comboDisplay">
+            <span class="combo-badge">🔥 COMBO <span id="comboNum">3</span>✕</span>
+          </div>
+          <div class="fc-card-scene">
+            <div class="fc-card" id="fcCard">
+              <div class="fc-face front">
+                <span class="fc-tag" id="fcTagFront">Hiragana</span>
+                <span class="fc-big" id="fcFrontChar" lang="ja"></span>
+                <span class="fc-hint-flip">Nhấn để xem đáp án</span>
+              </div>
+              <div class="fc-face back">
+                <span class="fc-tag" id="fcTagBack">Cách đọc</span>
+                <span class="fc-big" id="fcBackChar"></span>
+                <span class="fc-back-extra" id="fcBackExtra"></span>
+                <span class="fc-back-ex" id="fcBackEx"></span>
+                <span class="fc-hint-flip">Bạn nhớ chứ?</span>
+              </div>
+            </div>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-act no" id="fcNoBtn" disabled>❌ Chưa nhớ<span class="sub">phím ←</span></button>
+            <button class="fc-act yes" id="fcYesBtn" disabled>✅ Đã nhớ<span class="sub">phím →</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="fcSummaryPane" style="display:none;">
+        <div class="fc-summary">
+          <div class="sum-stars" id="sumStars">⭐⭐⭐</div>
+          <h2 id="sumTitle">Hoàn thành buổi luyện!</h2>
+          <p class="sum-accuracy" id="sumAccuracy">Độ chính xác: 100%</p>
+          <div class="fc-sum-grid">
+            <div class="fc-sum-card s-known"><div class="n" id="sumKnown">0</div><div class="l">✅ Đã nhớ</div></div>
+            <div class="fc-sum-card s-unknown"><div class="n" id="sumUnknown">0</div><div class="l">❌ Cần ôn lại</div></div>
+            <div class="fc-sum-card s-xp"><div class="n" id="sumXp">0</div><div class="l">⭐ XP kiếm được</div></div>
+            <div class="fc-sum-card s-total"><div class="n" id="sumTotal">0</div><div class="l">📚 Tổng số thẻ</div></div>
+          </div>
+          <div class="fc-sum-actions">
+            <button class="btn btn-primary btn-block" id="sumRetryUnknown">Ôn lại các thẻ chưa nhớ</button>
+            <button class="btn btn-secondary btn-block" id="sumRestart">Học lại từ đầu</button>
+            <button class="btn btn-ghost" data-nav="home">Về trang chủ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="view" id="view-quiz">
+    <div class="wrap">
+      <div class="view-header">
+        <h2 class="section-title">Trắc nghiệm</h2>
+        <p class="section-sub">Chọn đáp án đúng trong 4 lựa chọn — kiểu Duolingo/Quizlet, có điểm và chuỗi đúng liên tiếp.</p>
+      </div>
+
+      <div id="quizSetupPane">
+        <div class="quiz-setup">
+          <h3>Bộ câu hỏi</h3>
+          <p class="hint">Chọn một hoặc nhiều bộ kí tự (có thể kết hợp Hiragana, Katakana &amp; Kanji).</p>
+          <div class="chips quiz-block" id="quizSetChips">
+            <button class="chip active" data-set="hira_basic">Hiragana cơ bản · 46</button>
+            <button class="chip" data-set="hira_dakuten">Hiragana có dấu · 25</button>
+            <button class="chip" data-set="kata_basic">Katakana cơ bản · 46</button>
+            <button class="chip" data-set="kata_dakuten">Katakana có dấu · 25</button>
+            <button class="chip active" data-set="kanji_n5">Kanji N5 cơ bản · 60</button>
+          </div>
+          <h3>Loại câu hỏi</h3>
+          <div class="seg quiz-block" id="quizTypeSeg" style="margin-top:8px;">
+            <button data-qtype="mixed" class="active">Hỗn hợp</button>
+            <button data-qtype="kanji_meaning">Kanji → Nghĩa</button>
+            <button data-qtype="kanji_reading">Kanji → Đọc</button>
+            <button data-qtype="kana_romaji">Kana → Đọc</button>
+          </div>
+          <h3>Số câu</h3>
+          <div class="chips quiz-block" id="quizCountChips">
+            <button class="chip" data-count="10">10 câu</button>
+            <button class="chip active" data-count="15">15 câu</button>
+            <button class="chip" data-count="20">20 câu</button>
+          </div>
+          <div class="quiz-count" id="quizPoolText">Có thể tạo: 0 câu</div>
+          <div class="quiz-setup-actions">
+            <button class="btn btn-primary btn-block" id="quizStartBtn">✅ Bắt đầu trắc nghiệm</button>
+            <button class="btn btn-outline btn-block" id="quizQuickBtn">⚡ Thử nhanh 5 câu</button>
+          </div>
+          <p class="quiz-history" id="quizHistoryText"></p>
+        </div>
+      </div>
+
+      <div id="quizSessionPane" style="display:none;">
+        <div class="quiz-session">
+          <div class="quiz-session-top">
+            <div class="fc-progress-wrap">
+              <div class="fc-progress-bar"><div class="fc-progress-fill" id="quizProgressFill" style="width:0%"></div></div>
+              <div class="fc-progress-text"><span id="quizProgressLabel">0 / 0</span><span id="quizSessionXp">+0 XP</span></div>
+            </div>
+            <div class="session-timer" id="quizTimer">0:00</div>
+          </div>
+          <div class="quiz-stats-row">
+            <div class="quiz-stat-chip score">✅ <span id="quizScoreLabel">0</span> đúng</div>
+            <div class="quiz-stat-chip streak" id="quizStreakChip">🔥 Chuỗi <span id="quizStreakLabel">0</span></div>
+          </div>
+          <div class="combo-display" id="quizComboDisplay">
+            <span class="combo-badge">🔥 COMBO <span id="quizComboNum">3</span>✕</span>
+          </div>
+          <div class="quiz-question-card" id="quizQuestionCard">
+            <div class="quiz-q-tag" id="quizQTag">Kanji → Nghĩa</div>
+            <div class="quiz-q-prompt" id="quizQPrompt" lang="ja">一</div>
+            <p class="quiz-q-sub" id="quizQSub">Chọn nghĩa đúng</p>
+          </div>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+        </div>
+      </div>
+
+      <div id="quizSummaryPane" style="display:none;">
+        <div class="quiz-summary">
+          <div class="sum-stars" id="quizSumStars">⭐⭐⭐</div>
+          <h2 id="quizSumTitle">Hoàn thành!</h2>
+          <div class="quiz-sum-score" id="quizSumScore">0%</div>
+          <p class="sum-accuracy" id="quizSumAccuracy">0 / 0 câu đúng</p>
+          <div class="quiz-sum-grid">
+            <div class="quiz-sum-card s-correct"><div class="n" id="quizSumCorrect">0</div><div class="l">✅ Trả lời đúng</div></div>
+            <div class="quiz-sum-card s-streak"><div class="n" id="quizSumBestStreak">0</div><div class="l">🔥 Chuỗi cao nhất</div></div>
+            <div class="quiz-sum-card s-xp"><div class="n" id="quizSumXp">0</div><div class="l">⭐ XP kiếm được</div></div>
+            <div class="quiz-sum-card s-best"><div class="n" id="quizSumBest">—</div><div class="l">🏆 Kỷ lục cá nhân</div></div>
+          </div>
+          <div class="fc-sum-actions">
+            <button class="btn btn-primary btn-block" id="quizSumRetry">Làm lại</button>
+            <button class="btn btn-secondary btn-block" id="quizSumSetup">Chọn bộ khác</button>
+            <button class="btn btn-ghost" data-nav="home">Về trang chủ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="tabbar">
+  <button class="tabbar-item active" data-nav="home"><span class="ic">🏠</span>Trang chủ</button>
+  <button class="tabbar-item" data-nav="alphabet"><span class="ic">あ</span>Bảng chữ</button>
+  <button class="tabbar-item" data-nav="kanji"><span class="ic">漢</span>Kanji</button>
+  <button class="tabbar-item" data-nav="quiz"><span class="ic">✅</span>Trắc nghiệm</button>
+  <button class="tabbar-item" data-nav="flashcard"><span class="ic">🎴</span>Thẻ</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<canvas id="confettiCanvas"></canvas>
+<div class="xp-floaters" id="xpFloaters"></div>
+
+<footer class="wrap">Masu — dự án học tiếng Nhật N5. Dữ liệu tiến độ được lưu ngay trên trình duyệt của bạn.</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== DATA ===================== */
+const HIRA_BASIC=[
+  {k:'あ',r:'a',row:'vowel',c:0},{k:'い',r:'i',row:'vowel',c:1},{k:'う',r:'u',row:'vowel',c:2},{k:'え',r:'e',row:'vowel',c:3},{k:'お',r:'o',row:'vowel',c:4},
+  {k:'か',r:'ka',row:'k',c:0},{k:'き',r:'ki',row:'k',c:1},{k:'く',r:'ku',row:'k',c:2},{k:'け',r:'ke',row:'k',c:3},{k:'こ',r:'ko',row:'k',c:4},
+  {k:'さ',r:'sa',row:'s',c:0},{k:'し',r:'shi',row:'s',c:1},{k:'す',r:'su',row:'s',c:2},{k:'せ',r:'se',row:'s',c:3},{k:'そ',r:'so',row:'s',c:4},
+  {k:'た',r:'ta',row:'t',c:0},{k:'ち',r:'chi',row:'t',c:1},{k:'つ',r:'tsu',row:'t',c:2},{k:'て',r:'te',row:'t',c:3},{k:'と',r:'to',row:'t',c:4},
+  {k:'な',r:'na',row:'n',c:0},{k:'に',r:'ni',row:'n',c:1},{k:'ぬ',r:'nu',row:'n',c:2},{k:'ね',r:'ne',row:'n',c:3},{k:'の',r:'no',row:'n',c:4},
+  {k:'は',r:'ha',row:'h',c:0},{k:'ひ',r:'hi',row:'h',c:1},{k:'ふ',r:'fu',row:'h',c:2},{k:'へ',r:'he',row:'h',c:3},{k:'ほ',r:'ho',row:'h',c:4},
+  {k:'ま',r:'ma',row:'m',c:0},{k:'み',r:'mi',row:'m',c:1},{k:'む',r:'mu',row:'m',c:2},{k:'め',r:'me',row:'m',c:3},{k:'も',r:'mo',row:'m',c:4},
+  {k:'や',r:'ya',row:'y',c:0},{k:'ゆ',r:'yu',row:'y',c:2},{k:'よ',r:'yo',row:'y',c:4},
+  {k:'ら',r:'ra',row:'r',c:0},{k:'り',r:'ri',row:'r',c:1},{k:'る',r:'ru',row:'r',c:2},{k:'れ',r:'re',row:'r',c:3},{k:'ろ',r:'ro',row:'r',c:4},
+  {k:'わ',r:'wa',row:'w',c:0},{k:'を',r:'wo',row:'w',c:4},
+  {k:'ん',r:'n',row:'nn',c:0}
+];
+const HIRA_DAKUTEN=[
+  {k:'が',r:'ga',row:'g',c:0},{k:'ぎ',r:'gi',row:'g',c:1},{k:'ぐ',r:'gu',row:'g',c:2},{k:'げ',r:'ge',row:'g',c:3},{k:'ご',r:'go',row:'g',c:4},
+  {k:'ざ',r:'za',row:'z',c:0},{k:'じ',r:'ji',row:'z',c:1},{k:'ず',r:'zu',row:'z',c:2},{k:'ぜ',r:'ze',row:'z',c:3},{k:'ぞ',r:'zo',row:'z',c:4},
+  {k:'だ',r:'da',row:'d',c:0},{k:'ぢ',r:'ji',row:'d',c:1},{k:'づ',r:'zu',row:'d',c:2},{k:'で',r:'de',row:'d',c:3},{k:'ど',r:'do',row:'d',c:4},
+  {k:'ば',r:'ba',row:'b',c:0},{k:'び',r:'bi',row:'b',c:1},{k:'ぶ',r:'bu',row:'b',c:2},{k:'べ',r:'be',row:'b',c:3},{k:'ぼ',r:'bo',row:'b',c:4},
+  {k:'ぱ',r:'pa',row:'p',c:0},{k:'ぴ',r:'pi',row:'p',c:1},{k:'ぷ',r:'pu',row:'p',c:2},{k:'ぺ',r:'pe',row:'p',c:3},{k:'ぽ',r:'po',row:'p',c:4}
+];
+const KATA_BASIC=[
+  {k:'ア',r:'a',row:'vowel',c:0},{k:'イ',r:'i',row:'vowel',c:1},{k:'ウ',r:'u',row:'vowel',c:2},{k:'エ',r:'e',row:'vowel',c:3},{k:'オ',r:'o',row:'vowel',c:4},
+  {k:'カ',r:'ka',row:'k',c:0},{k:'キ',r:'ki',row:'k',c:1},{k:'ク',r:'ku',row:'k',c:2},{k:'ケ',r:'ke',row:'k',c:3},{k:'コ',r:'ko',row:'k',c:4},
+  {k:'サ',r:'sa',row:'s',c:0},{k:'シ',r:'shi',row:'s',c:1},{k:'ス',r:'su',row:'s',c:2},{k:'セ',r:'se',row:'s',c:3},{k:'ソ',r:'so',row:'s',c:4},
+  {k:'タ',r:'ta',row:'t',c:0},{k:'チ',r:'chi',row:'t',c:1},{k:'ツ',r:'tsu',row:'t',c:2},{k:'テ',r:'te',row:'t',c:3},{k:'ト',r:'to',row:'t',c:4},
+  {k:'ナ',r:'na',row:'n',c:0},{k:'ニ',r:'ni',row:'n',c:1},{k:'ヌ',r:'nu',row:'n',c:2},{k:'ネ',r:'ne',row:'n',c:3},{k:'ノ',r:'no',row:'n',c:4},
+  {k:'ハ',r:'ha',row:'h',c:0},{k:'ヒ',r:'hi',row:'h',c:1},{k:'フ',r:'fu',row:'h',c:2},{k:'ヘ',r:'he',row:'h',c:3},{k:'ホ',r:'ho',row:'h',c:4},
+  {k:'マ',r:'ma',row:'m',c:0},{k:'ミ',r:'mi',row:'m',c:1},{k:'ム',r:'mu',row:'m',c:2},{k:'メ',r:'me',row:'m',c:3},{k:'モ',r:'mo',row:'m',c:4},
+  {k:'ヤ',r:'ya',row:'y',c:0},{k:'ユ',r:'yu',row:'y',c:2},{k:'ヨ',r:'yo',row:'y',c:4},
+  {k:'ラ',r:'ra',row:'r',c:0},{k:'リ',r:'ri',row:'r',c:1},{k:'ル',r:'ru',row:'r',c:2},{k:'レ',r:'re',row:'r',c:3},{k:'ロ',r:'ro',row:'r',c:4},
+  {k:'ワ',r:'wa',row:'w',c:0},{k:'ヲ',r:'wo',row:'w',c:4},
+  {k:'ン',r:'n',row:'nn',c:0}
+];
+const KATA_DAKUTEN=[
+  {k:'ガ',r:'ga',row:'g',c:0},{k:'ギ',r:'gi',row:'g',c:1},{k:'グ',r:'gu',row:'g',c:2},{k:'ゲ',r:'ge',row:'g',c:3},{k:'ゴ',r:'go',row:'g',c:4},
+  {k:'ザ',r:'za',row:'z',c:0},{k:'ジ',r:'ji',row:'z',c:1},{k:'ズ',r:'zu',row:'z',c:2},{k:'ゼ',r:'ze',row:'z',c:3},{k:'ゾ',r:'zo',row:'z',c:4},
+  {k:'ダ',r:'da',row:'d',c:0},{k:'ヂ',r:'ji',row:'d',c:1},{k:'ヅ',r:'zu',row:'d',c:2},{k:'デ',r:'de',row:'d',c:3},{k:'ド',r:'do',row:'d',c:4},
+  {k:'バ',r:'ba',row:'b',c:0},{k:'ビ',r:'bi',row:'b',c:1},{k:'ブ',r:'bu',row:'b',c:2},{k:'ベ',r:'be',row:'b',c:3},{k:'ボ',r:'bo',row:'b',c:4},
+  {k:'パ',r:'pa',row:'p',c:0},{k:'ピ',r:'pi',row:'p',c:1},{k:'プ',r:'pu',row:'p',c:2},{k:'ペ',r:'pe',row:'p',c:3},{k:'ポ',r:'po',row:'p',c:4}
+];
+const KANJI_N5=[
+  {k:'一',on:'イチ',kun:'ひと(つ)',meaning:'một',group:'number',ex:{w:'一人',r:'ひとり',m:'một người'}},
+  {k:'二',on:'ニ',kun:'ふた(つ)',meaning:'hai',group:'number',ex:{w:'二つ',r:'ふたつ',m:'hai cái'}},
+  {k:'三',on:'サン',kun:'み(つ)',meaning:'ba',group:'number',ex:{w:'三人',r:'さんにん',m:'ba người'}},
+  {k:'四',on:'シ',kun:'よ(つ)',meaning:'bốn',group:'number',ex:{w:'四月',r:'しがつ',m:'tháng tư'}},
+  {k:'五',on:'ゴ',kun:'いつ(つ)',meaning:'năm',group:'number',ex:{w:'五時',r:'ごじ',m:'5 giờ'}},
+  {k:'六',on:'ロク',kun:'む(つ)',meaning:'sáu',group:'number',ex:{w:'六月',r:'ろくがつ',m:'tháng sáu'}},
+  {k:'七',on:'シチ',kun:'なな(つ)',meaning:'bảy',group:'number',ex:{w:'七つ',r:'ななつ',m:'bảy cái'}},
+  {k:'八',on:'ハチ',kun:'や(つ)',meaning:'tám',group:'number',ex:{w:'八日',r:'ようか',m:'8 ngày'}},
+  {k:'九',on:'キュウ',kun:'ここの(つ)',meaning:'chín',group:'number',ex:{w:'九時',r:'くじ',m:'9 giờ'}},
+  {k:'十',on:'ジュウ',kun:'とお',meaning:'mười',group:'number',ex:{w:'十分',r:'じゅっぷん',m:'10 phút'}},
+  {k:'百',on:'ヒャク',kun:'',meaning:'trăm',group:'number',ex:{w:'百円',r:'ひゃくえん',m:'100 yên'}},
+  {k:'千',on:'セン',kun:'ち',meaning:'nghìn',group:'number',ex:{w:'千円',r:'せんえん',m:'1000 yên'}},
+  {k:'万',on:'マン',kun:'',meaning:'vạn',group:'number',ex:{w:'一万',r:'いちまん',m:'mười nghìn'}},
+  {k:'円',on:'エン',kun:'',meaning:'yên (tiền)',group:'number',ex:{w:'百円',r:'ひゃくえん',m:'100 yên'}},
+  {k:'人',on:'ジン、ニン',kun:'ひと',meaning:'người',group:'people',ex:{w:'日本人',r:'にほんじん',m:'người Nhật'}},
+  {k:'男',on:'ダン、ナン',kun:'おとこ',meaning:'nam (giới)',group:'people',ex:{w:'男の人',r:'おとこのひと',m:'đàn ông'}},
+  {k:'女',on:'ジョ',kun:'おんな',meaning:'nữ (giới)',group:'people',ex:{w:'女の人',r:'おんなのひと',m:'phụ nữ'}},
+  {k:'子',on:'シ、ス',kun:'こ',meaning:'con / trẻ em',group:'people',ex:{w:'子供',r:'こども',m:'trẻ em'}},
+  {k:'父',on:'フ',kun:'ちち',meaning:'cha',group:'people',ex:{w:'お父さん',r:'おとうさん',m:'bố'}},
+  {k:'母',on:'ボ',kun:'はは',meaning:'mẹ',group:'people',ex:{w:'お母さん',r:'おかあさん',m:'mẹ'}},
+  {k:'友',on:'ユウ',kun:'とも',meaning:'bạn',group:'people',ex:{w:'友達',r:'ともだち',m:'bạn bè'}},
+  {k:'目',on:'モク、ボク',kun:'め',meaning:'mắt',group:'body',ex:{w:'目',r:'め',m:'mắt'}},
+  {k:'耳',on:'ジ',kun:'みみ',meaning:'tai',group:'body',ex:{w:'耳',r:'みみ',m:'tai'}},
+  {k:'口',on:'コウ、ク',kun:'くち',meaning:'miệng',group:'body',ex:{w:'入口',r:'いりぐち',m:'lối vào'}},
+  {k:'手',on:'シュ',kun:'て',meaning:'tay',group:'body',ex:{w:'手',r:'て',m:'tay'}},
+  {k:'足',on:'ソク',kun:'あし',meaning:'chân',group:'body',ex:{w:'足',r:'あし',m:'chân'}},
+  {k:'日',on:'ニチ、ジツ',kun:'ひ、か',meaning:'ngày / mặt trời',group:'nature',ex:{w:'日本',r:'にほん',m:'Nhật Bản'}},
+  {k:'月',on:'ゲツ、ガツ',kun:'つき',meaning:'tháng / mặt trăng',group:'nature',ex:{w:'一月',r:'いちがつ',m:'tháng một'}},
+  {k:'火',on:'カ',kun:'ひ',meaning:'lửa',group:'nature',ex:{w:'火曜日',r:'かようび',m:'thứ Ba'}},
+  {k:'水',on:'スイ',kun:'みず',meaning:'nước',group:'nature',ex:{w:'水曜日',r:'すいようび',m:'thứ Tư'}},
+  {k:'木',on:'モク、ボク',kun:'き',meaning:'cây / gỗ',group:'nature',ex:{w:'木曜日',r:'もくようび',m:'thứ Năm'}},
+  {k:'金',on:'キン、コン',kun:'かね',meaning:'vàng / tiền',group:'nature',ex:{w:'金曜日',r:'きんようび',m:'thứ Sáu'}},
+  {k:'土',on:'ド、ト',kun:'つち',meaning:'đất',group:'nature',ex:{w:'土曜日',r:'どようび',m:'thứ Bảy'}},
+  {k:'山',on:'サン',kun:'やま',meaning:'núi',group:'nature',ex:{w:'富士山',r:'ふじさん',m:'núi Phú Sĩ'}},
+  {k:'川',on:'セン',kun:'かわ',meaning:'sông',group:'nature',ex:{w:'川',r:'かわ',m:'dòng sông'}},
+  {k:'天',on:'テン',kun:'あま',meaning:'trời',group:'nature',ex:{w:'天気',r:'てんき',m:'thời tiết'}},
+  {k:'上',on:'ジョウ、ショウ',kun:'うえ、あ',meaning:'trên',group:'space',ex:{w:'上手',r:'じょうず',m:'giỏi'}},
+  {k:'下',on:'カ、ゲ',kun:'した、さ',meaning:'dưới',group:'space',ex:{w:'下手',r:'へた',m:'kém'}},
+  {k:'中',on:'チュウ',kun:'なか',meaning:'giữa / trong',group:'space',ex:{w:'中学校',r:'ちゅうがっこう',m:'THCS'}},
+  {k:'外',on:'ガイ、ゲ',kun:'そと',meaning:'bên ngoài',group:'space',ex:{w:'外国',r:'がいこく',m:'nước ngoài'}},
+  {k:'大',on:'ダイ、タイ',kun:'おお(きい)',meaning:'lớn',group:'size',ex:{w:'大学',r:'だいがく',m:'đại học'}},
+  {k:'小',on:'ショウ',kun:'ちい(さい)、こ',meaning:'nhỏ',group:'size',ex:{w:'小さい',r:'ちいさい',m:'nhỏ bé'}},
+  {k:'長',on:'チョウ',kun:'なが(い)',meaning:'dài',group:'size',ex:{w:'長い',r:'ながい',m:'dài'}},
+  {k:'高',on:'コウ',kun:'たか(い)',meaning:'cao / đắt',group:'size',ex:{w:'高い',r:'たかい',m:'cao / đắt'}},
+  {k:'新',on:'シン',kun:'あたら(しい)',meaning:'mới',group:'size',ex:{w:'新しい',r:'あたらしい',m:'mới'}},
+  {k:'年',on:'ネン',kun:'とし',meaning:'năm',group:'time',ex:{w:'今年',r:'ことし',m:'năm nay'}},
+  {k:'時',on:'ジ',kun:'とき',meaning:'giờ / lúc',group:'time',ex:{w:'時間',r:'じかん',m:'thời gian'}},
+  {k:'分',on:'フン、ブン',kun:'わ(ける)',meaning:'phút / chia',group:'time',ex:{w:'五分',r:'ごふん',m:'5 phút'}},
+  {k:'今',on:'コン、キン',kun:'いま',meaning:'bây giờ',group:'time',ex:{w:'今日',r:'きょう',m:'hôm nay'}},
+  {k:'先',on:'セン',kun:'さき',meaning:'trước / trước đó',group:'time',ex:{w:'先生',r:'せんせい',m:'thầy/cô giáo'}},
+  {k:'学',on:'ガク',kun:'まな(ぶ)',meaning:'học',group:'study',ex:{w:'学生',r:'がくせい',m:'học sinh'}},
+  {k:'校',on:'コウ',kun:'',meaning:'trường',group:'study',ex:{w:'学校',r:'がっこう',m:'trường học'}},
+  {k:'本',on:'ホン',kun:'もと',meaning:'sách / gốc',group:'study',ex:{w:'日本語',r:'にほんご',m:'tiếng Nhật'}},
+  {k:'名',on:'メイ、ミョウ',kun:'な',meaning:'tên',group:'study',ex:{w:'名前',r:'なまえ',m:'tên'}},
+  {k:'国',on:'コク',kun:'くに',meaning:'nước / quốc gia',group:'study',ex:{w:'中国',r:'ちゅうごく',m:'Trung Quốc'}},
+  {k:'行',on:'コウ、ギョウ',kun:'い(く)、おこな(う)',meaning:'đi / hàng',group:'verb',ex:{w:'銀行',r:'ぎんこう',m:'ngân hàng'}},
+  {k:'来',on:'ライ',kun:'く(る)',meaning:'đến',group:'verb',ex:{w:'来月',r:'らいげつ',m:'tháng sau'}},
+  {k:'見',on:'ケン',kun:'み(る)',meaning:'nhìn / xem',group:'verb',ex:{w:'見る',r:'みる',m:'xem'}},
+  {k:'入',on:'ニュウ',kun:'はい(る)、い(れる)',meaning:'vào',group:'verb',ex:{w:'入口',r:'いりぐち',m:'lối vào'}},
+  {k:'出',on:'シュツ、スイ',kun:'で(る)、だ(す)',meaning:'ra / xuất',group:'verb',ex:{w:'出口',r:'でぐち',m:'lối ra'}}
+];
+const SETS={
+  hira_basic:{label:'Hiragana cơ bản',data:HIRA_BASIC,script:'hira',type:'basic',lang:'ja-JP'},
+  hira_dakuten:{label:'Hiragana có dấu',data:HIRA_DAKUTEN,script:'hira',type:'dakuten',lang:'ja-JP'},
+  kata_basic:{label:'Katakana cơ bản',data:KATA_BASIC,script:'kata',type:'basic',lang:'ja-JP'},
+  kata_dakuten:{label:'Katakana có dấu',data:KATA_DAKUTEN,script:'kata',type:'dakuten',lang:'ja-JP'},
+  kanji_n5:{label:'Kanji N5',data:KANJI_N5,script:'kanji',type:'n5',lang:'ja-JP',isKanji:true}
+};
+const ROW_ORDER_BASIC=['vowel','k','s','t','n','h','m','y','r','w','nn'];
+const ROW_ORDER_DAKUTEN=['g','z','d','b','p'];
+const ROW_LABEL={vowel:'',k:'K',s:'S',t:'T',n:'N',h:'H',m:'M',y:'Y',r:'R',w:'W',nn:'',g:'G',z:'Z',d:'D',b:'B',p:'P'};
+const TOTAL_CHARS=HIRA_BASIC.length+HIRA_DAKUTEN.length+KATA_BASIC.length+KATA_DAKUTEN.length+KANJI_N5.length;
+const KANJI_GROUPS={all:'Tất cả',number:'Số',people:'Người',body:'Cơ thể',nature:'Thiên nhiên',space:'Vị trí',size:'Tính từ',time:'Thời gian',study:'Học tập',verb:'Động từ'};
+function isKanjiSet(id){return!!SETS[id].isKanji;}
+function formatKanjiReading(item){
+  const parts=[];
+  if(item.on)parts.push('音: '+item.on);
+  if(item.kun)parts.push('訓: '+item.kun);
+  return parts.join(' · ');
+}
+function cardFromSetItem(id,c){
+  if(isKanjiSet(id)){
+    return{kana:c.k,romaji:c.meaning,reading:formatKanjiReading(c),example:c.ex,setId:id,missCount:0,isKanji:true,meaning:c.meaning};
+  }
+  return{kana:c.k,romaji:c.r,setId:id,missCount:0};
+}
+
+/* ===================== LEVEL SYSTEM ===================== */
+const LEVELS=[
+  {minXp:0,   label:'初心者', color:'#8C8FA3'},
+  {minXp:50,  label:'学習者', color:'#3F7A5C'},
+  {minXp:150, label:'練習生', color:'#3A5A8C'},
+  {minXp:300, label:'努力家', color:'#C98A28'},
+  {minXp:500, label:'N5準備', color:'#C23B3B'},
+  {minXp:750, label:'N5達人', color:'#8B4513'},
+];
+let lastLevelIdx=-1;
+function getCurrentLevel(xp){
+  let idx=0;
+  for(let i=0;i<LEVELS.length;i++){if(xp>=LEVELS[i].minXp)idx=i;else break;}
+  return{...LEVELS[idx],idx};
+}
+function updateLevelBadge(){
+  const xp=progress.xp||0;
+  const{label,color,idx}=getCurrentLevel(xp);
+  const el=document.getElementById('navLevel');
+  el.textContent=label;
+  el.style.color=color;
+  el.style.borderColor=color+'99';
+  el.style.background=color+'22';
+  if(lastLevelIdx>=0&&idx>lastLevelIdx){
+    showAchievementToast('🎊 Lên cấp mới: '+label+'!');
+  }
+  lastLevelIdx=idx;
+}
+
+/* ===================== PROGRESS ===================== */
+const STORAGE_KEY='masu_progress_v1';
+let progress=loadProgress();
+function loadProgress(){
+  try{const r=localStorage.getItem(STORAGE_KEY);if(r)return JSON.parse(r);}catch(e){}
+  return{mastered:{},xp:0,streakCount:0,lastActiveDate:null};
+}
+function saveProgress(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(progress));}catch(e){}}
+function touchStreak(){
+  const today=new Date().toISOString().slice(0,10);
+  if(progress.lastActiveDate===today)return;
+  if(progress.lastActiveDate){
+    const diff=Math.round((new Date(today)-new Date(progress.lastActiveDate))/86400000);
+    progress.streakCount=(diff===1)?(progress.streakCount||0)+1:1;
+  }else{progress.streakCount=1;}
+  progress.lastActiveDate=today;
+  saveProgress();
+}
+touchStreak();
+
+/* ===================== DAILY GOAL ===================== */
+const DAILY_GOAL=20;
+function getDailyCount(){
+  try{const r=localStorage.getItem('masu_daily_v1');if(r){const d=JSON.parse(r);if(d.date===new Date().toISOString().slice(0,10))return d.count;}}catch(e){}
+  return 0;
+}
+function addDailyCount(n){
+  const today=new Date().toISOString().slice(0,10);
+  const cur=getDailyCount();
+  const next=cur+n;
+  try{localStorage.setItem('masu_daily_v1',JSON.stringify({date:today,count:next}));}catch(e){}
+  if(cur<DAILY_GOAL&&next>=DAILY_GOAL){setTimeout(()=>showAchievementToast('🎯 Đạt mục tiêu ngày hôm nay! Tuyệt!'),800);}
+  return next;
+}
+function renderDailyRing(){
+  const count=getDailyCount();
+  const pct=Math.min(count/DAILY_GOAL,1);
+  const circum=2*Math.PI*37; // ~232.5
+  const offset=circum*(1-pct);
+  document.getElementById('dailyRingFill').style.strokeDashoffset=offset.toFixed(1);
+  document.getElementById('dailyRingFill').style.strokeDasharray=circum.toFixed(1);
+  document.getElementById('dailyCount').textContent=Math.min(count,DAILY_GOAL);
+}
+
+/* ===================== COMBO ===================== */
+let fcCombo=0;
+let sessionCardsAnswered=0;
+function getComboMultiplier(){if(fcCombo>=8)return 4;if(fcCombo>=5)return 3;if(fcCombo>=3)return 2;return 1;}
+function updateCombo(correct){
+  if(correct){
+    fcCombo++;
+    if(fcCombo>=3){
+      const el=document.getElementById('comboDisplay');
+      document.getElementById('comboNum').textContent=fcCombo;
+      el.classList.add('visible');
+      el.classList.remove('combo-pulse');
+      void el.offsetWidth;
+      el.classList.add('combo-pulse');
+      if(fcCombo%5===0)playSound('combo');
+    }
+  }else{
+    fcCombo=0;
+    const el=document.getElementById('comboDisplay');
+    el.classList.remove('visible','combo-pulse');
+  }
+}
+
+/* ===================== SOUND ===================== */
+let audioCtx=null;
+let soundEnabled=false;
+function getAudioCtx(){
+  if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+  return audioCtx;
+}
+function playTone(freq,dur,type='sine',vol=0.18){
+  if(!soundEnabled)return;
+  const ctx=getAudioCtx();if(!ctx)return;
+  try{
+    const osc=ctx.createOscillator();const gain=ctx.createGain();
+    osc.connect(gain);gain.connect(ctx.destination);
+    osc.type=type;osc.frequency.setValueAtTime(freq,ctx.currentTime);
+    gain.gain.setValueAtTime(vol,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+dur);
+    osc.start(ctx.currentTime);osc.stop(ctx.currentTime+dur);
+  }catch(e){}
+}
+function playSound(type){
+  if(!soundEnabled)return;
+  if(type==='correct'){playTone(523,.08);setTimeout(()=>playTone(659,.1),75);setTimeout(()=>playTone(784,.18),150);}
+  else if(type==='wrong'){playTone(277,.1);setTimeout(()=>playTone(233,.18),80);}
+  else if(type==='combo'){playTone(1047,.07);setTimeout(()=>playTone(1319,.12),50);}
+  else if(type==='complete'){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>playTone(f,.28),i*90));}
+  else if(type==='flip'){playTone(440,.04,'sine',.08);}
+}
+function toggleSound(){
+  soundEnabled=!soundEnabled;
+  try{localStorage.setItem('masu_sound',soundEnabled?'1':'0');}catch(e){}
+  document.getElementById('soundToggle').textContent=soundEnabled?'🔊':'🔇';
+  if(soundEnabled){const ctx=getAudioCtx();if(ctx&&ctx.state==='suspended')ctx.resume();playTone(523,.1);}
+}
+document.getElementById('soundToggle').addEventListener('click',toggleSound);
+(function initSound(){try{const s=localStorage.getItem('masu_sound');if(s==='1'){soundEnabled=true;document.getElementById('soundToggle').textContent='🔊';}}catch(e){}})();
+
+/* ===================== DARK MODE ===================== */
+function toggleDark(){
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const t=isDark?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  try{localStorage.setItem('masu_theme',t);}catch(e){}
+  document.getElementById('darkToggle').textContent=t==='dark'?'☀️':'🌙';
+}
+document.getElementById('darkToggle').addEventListener('click',toggleDark);
+(function initTheme(){try{const t=localStorage.getItem('masu_theme');if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('darkToggle').textContent=t==='dark'?'☀️':'🌙';}}catch(e){}})();
+
+/* ===================== TOAST ===================== */
+let toastTimer=null;
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast show';
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.className='toast',300);},2200);
+}
+function showAchievementToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast achievement show';
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.className='toast',300);},3200);
+}
+
+/* ===================== CONFETTI ===================== */
+function launchConfetti(){
+  const canvas=document.getElementById('confettiCanvas');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const ctx=canvas.getContext('2d');
+  const colors=['#C23B3B','#3A5A8C','#3F7A5C','#C98A28','#F97316','#8B5CF6','#EC4899'];
+  const pieces=Array.from({length:90},()=>({
+    x:Math.random()*canvas.width,y:-20-Math.random()*80,
+    w:7+Math.random()*8,h:3+Math.random()*3,
+    color:colors[Math.floor(Math.random()*colors.length)],
+    vx:(Math.random()-.5)*3.5,vy:3.5+Math.random()*4,
+    rot:Math.random()*360,rotv:(Math.random()-.5)*9,alpha:1
+  }));
+  let raf;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotv;p.vy+=0.12;
+      if(p.y>canvas.height*.72)p.alpha-=0.035;
+      if(p.alpha>0){
+        alive=true;
+        ctx.save();ctx.globalAlpha=Math.max(0,p.alpha);
+        ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+      }
+    });
+    if(alive)raf=requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
+
+/* ===================== XP FLOAT ===================== */
+function spawnXpFloat(amount){
+  const card=document.getElementById('fcCard');
+  const rect=card.getBoundingClientRect();
+  const el=document.createElement('div');
+  el.className='xp-float';
+  const mult=getComboMultiplier();
+  el.textContent='+'+amount+' XP'+(mult>1?' 🔥×'+mult:'');
+  el.style.left=(rect.left+rect.width/2)+'px';
+  el.style.top=(rect.top+rect.height*0.3)+'px';
+  document.getElementById('xpFloaters').appendChild(el);
+  setTimeout(()=>el.remove(),1200);
+}
+
+/* ===================== HERO PARTICLES ===================== */
+function spawnHeroParticles(){
+  const cont=document.getElementById('heroParticles');
+  const kana=['あ','い','う','え','お','か','き','く','さ','し','す','た','ち','な','に','は','ふ','ま','み','や','ら','り','わ','ん','が','ぞ','ば'];
+  kana.forEach((k,i)=>{
+    const el=document.createElement('span');
+    el.className='hero-particle';
+    el.textContent=k;
+    el.setAttribute('lang','ja');
+    el.style.left=(3+Math.random()*94)+'%';
+    el.style.top=(5+Math.random()*88)+'%';
+    el.style.fontSize=(22+Math.random()*52)+'px';
+    el.style.animationDuration=(9+Math.random()*14)+'s';
+    el.style.animationDelay=(-Math.random()*18)+'s';
+    cont.appendChild(el);
+  });
+}
+spawnHeroParticles();
+
+/* ===================== SESSION TIMER ===================== */
+let timerInterval=null,timerStart=null;
+function startTimer(){
+  timerStart=Date.now();
+  timerInterval=setInterval(()=>{
+    const sec=Math.floor((Date.now()-timerStart)/1000);
+    const m=Math.floor(sec/60),s=sec%60;
+    document.getElementById('sessionTimer').textContent=m+':'+String(s).padStart(2,'0');
+  },1000);
+}
+function stopTimer(){clearInterval(timerInterval);timerInterval=null;}
+
+/* ===================== MARK RESULT ===================== */
+function markResult(kana,known){
+  if(known){
+    const mult=getComboMultiplier();
+    const isNew=!progress.mastered[kana];
+    progress.mastered[kana]=true;
+    const base=isNew?10:2;
+    const earned=Math.round(base*mult);
+    progress.xp+=earned;
+    saveProgress();
+    return earned;
+  }else{
+    delete progress.mastered[kana];
+    saveProgress();
+    return 0;
+  }
+}
+
+/* ===================== NAV / ROUTING ===================== */
+function switchView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.toggle('active',b.dataset.nav===name));
+  document.querySelectorAll('.tabbar-item').forEach(b=>b.classList.toggle('active',b.dataset.nav===name));
+  if(name==='home'){renderStats();renderPath();renderDailyRing();}
+  if(name==='kanji'){renderKanji();}
+  if(name==='quiz'){updateQuizPoolText();}
+  window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
+}
+document.querySelectorAll('[data-nav]').forEach(btn=>{
+  btn.addEventListener('click',()=>switchView(btn.dataset.nav));
+});
+
+/* ===================== SPEECH ===================== */
+function speak(text,lang){
+  if(!('speechSynthesis' in window))return;
+  try{window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang||'ja-JP';u.rate=0.85;window.speechSynthesis.speak(u);}catch(e){}
+}
+
+/* ===================== STATS RENDER ===================== */
+function renderStats(){
+  const xp=progress.xp||0;
+  const streak=progress.streakCount||0;
+  document.getElementById('navStreak').textContent=streak;
+  document.getElementById('navXp').textContent=xp;
+  document.getElementById('homeStreak').textContent=streak;
+  document.getElementById('homeXp').textContent=xp;
+  const masteredKeys=Object.keys(progress.mastered);
+  document.getElementById('homeMastered').textContent=masteredKeys.length;
+  document.getElementById('homeTotalChars').textContent=TOTAL_CHARS;
+  const hiraAll=[...HIRA_BASIC,...HIRA_DAKUTEN].map(x=>x.k);
+  const kataAll=[...KATA_BASIC,...KATA_DAKUTEN].map(x=>x.k);
+  const kanjiAll=KANJI_N5.map(x=>x.k);
+  const hiraMastered=hiraAll.filter(k=>progress.mastered[k]).length;
+  const kataMastered=kataAll.filter(k=>progress.mastered[k]).length;
+  const kanjiMastered=kanjiAll.filter(k=>progress.mastered[k]).length;
+  renderMasuBar('barHira',hiraMastered,hiraAll.length,'fill-h');
+  renderMasuBar('barKata',kataMastered,kataAll.length,'fill-k');
+  renderMasuBar('barKanji',kanjiMastered,kanjiAll.length,'fill-h');
+  document.getElementById('pctHira').textContent=Math.round(hiraMastered/hiraAll.length*100)+'%';
+  document.getElementById('pctKata').textContent=Math.round(kataMastered/kataAll.length*100)+'%';
+  document.getElementById('pctKanji').textContent=Math.round(kanjiMastered/kanjiAll.length*100)+'%';
+  updateLevelBadge();
+}
+function renderMasuBar(elId,mastered,total,fillClass){
+  const el=document.getElementById(elId);el.innerHTML='';
+  const filled=Math.round((mastered/total)*10);
+  for(let i=0;i<10;i++){const sq=document.createElement('div');sq.className='sq'+(i<filled?' '+fillClass:'');el.appendChild(sq);}
+}
+
+/* ===================== PATH ===================== */
+const PATH_DATA=[
+  {set:'hira_basic',  title:'Hiragana cơ bản',  sub:'46 kí tự · âm gốc あ・か・さ…',icon:'あ',locked:false},
+  {set:'hira_dakuten',title:'Hiragana có dấu',  sub:'25 kí tự · âm đục が・ば・ぱ…',icon:'が',locked:false},
+  {set:'kata_basic',  title:'Katakana cơ bản',  sub:'46 kí tự · dùng cho từ ngoại lai',icon:'ア',locked:false},
+  {set:'kata_dakuten',title:'Katakana có dấu',  sub:'25 kí tự · âm đục ガ・バ・パ…',icon:'ガ',locked:false},
+  {set:'kanji_n5',  title:'Kanji N5 cơ bản',  sub:'60 chữ Hán · số, người, thiên nhiên…',icon:'一',locked:false},
+  {set:null,title:'Từ vựng N5',sub:'Sắp ra mắt',icon:'語',locked:true},
+  {set:null,title:'Ngữ pháp N5',sub:'Sắp ra mắt',icon:'文',locked:true}
+];
+function renderPath(){
+  const el=document.getElementById('pathList');el.innerHTML='';
+  PATH_DATA.forEach(node=>{
+    let mc=0,total=0;
+    if(node.set){const d=SETS[node.set].data;total=d.length;mc=d.filter(c=>progress.mastered[c.k]).length;}
+    const done=total>0&&mc===total;
+    const btn=document.createElement('button');
+    btn.className='path-node'+(node.locked?' locked':'')+(done?' done':'');
+    const pct=total>0?Math.round(mc/total*100):0;
+    btn.innerHTML=`
+      <div class="path-seal" lang="ja">${node.locked?'🔒':node.icon}</div>
+      <div class="path-info">
+        <div class="pn-title">${node.title}</div>
+        <div class="pn-sub">${node.locked?node.sub:mc+' / '+total+' đã thuộc'}</div>
+        ${total>0&&!node.locked?`<div class="pn-mini-bar"><div class="pn-mini-fill" style="width:${pct}%"></div></div>`:''}
+        ${done?'<span class="pn-badge done">✓ Hoàn thành</span>':(node.locked?'<span class="pn-badge locked">Sắp ra mắt</span>':'')}
+      </div>`;
+    btn.addEventListener('click',()=>{
+      if(node.locked){showToast('🔒 '+node.title+' đang được phát triển, quay lại sau nhé!');return;}
+      if(node.set==='kanji_n5'){switchView('kanji');return;}
+      const conf=SETS[node.set];
+      scriptState=conf.script;typeState=conf.type;
+      renderAlphabet();switchView('alphabet');
+    });
+    el.appendChild(btn);
+  });
+}
+
+/* ===================== ALPHABET ===================== */
+let scriptState='hira',typeState='basic';
+document.getElementById('scriptSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  scriptState=b.dataset.script;
+  document.querySelectorAll('#scriptSeg button').forEach(x=>x.classList.toggle('active',x===b));
+  renderAlphabet();
+});
+document.getElementById('typeChips').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  typeState=b.dataset.type;
+  document.querySelectorAll('#typeChips .chip').forEach(x=>x.classList.toggle('active',x===b));
+  renderAlphabet();
+});
+function currentSetId(){return scriptState+'_'+typeState;}
+function renderAlphabet(){
+  document.querySelectorAll('#scriptSeg button').forEach(x=>x.classList.toggle('active',x.dataset.script===scriptState));
+  document.querySelectorAll('#typeChips .chip').forEach(x=>x.classList.toggle('active',x.dataset.type===typeState));
+  const conf=SETS[currentSetId()];
+  const data=conf.data;
+  const rowOrder=typeState==='basic'?ROW_ORDER_BASIC:ROW_ORDER_DAKUTEN;
+  const grid=document.getElementById('kanaGrid');grid.innerHTML='';
+  rowOrder.forEach(rowKey=>{
+    const rowChars=data.filter(c=>c.row===rowKey);
+    if(!rowChars.length)return;
+    const label=document.createElement('div');label.className='kana-row-label';label.textContent=ROW_LABEL[rowKey];grid.appendChild(label);
+    for(let col=0;col<5;col++){
+      const found=rowChars.find(c=>c.c===col);
+      const cell=document.createElement('div');
+      if(found){
+        cell.className='kana-cell has';
+        const known=!!progress.mastered[found.k];
+        cell.innerHTML=`<span class="spk">🔊</span><span class="ch" lang="ja">${found.k}</span><span class="ro">${found.r}</span>${known?'<span class="check">✓</span>':''}`;
+        cell.addEventListener('click',()=>{speak(found.k,conf.lang);cell.classList.remove('stamped');void cell.offsetWidth;cell.classList.add('stamped');});
+      }else{cell.className='kana-cell empty';}
+      grid.appendChild(cell);
+    }
+  });
+}
+document.getElementById('alphaToFc').addEventListener('click',()=>{
+  document.querySelectorAll('#fcSetChips .chip').forEach(c=>c.classList.toggle('active',c.dataset.set===currentSetId()));
+  switchView('flashcard');updateFcCount();updateFcDirLabels();
+});
+
+/* ===================== KANJI ===================== */
+let kanjiGroupState='all';
+document.getElementById('kanjiGroupChips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  kanjiGroupState=b.dataset.group;
+  document.querySelectorAll('#kanjiGroupChips .chip').forEach(x=>x.classList.toggle('active',x===b));
+  renderKanji();
+});
+function renderKanji(){
+  const grid=document.getElementById('kanjiGrid');
+  const detail=document.getElementById('kanjiDetail');
+  grid.innerHTML='';detail.classList.remove('visible');detail.innerHTML='';
+  const items=kanjiGroupState==='all'?KANJI_N5:KANJI_N5.filter(k=>k.group===kanjiGroupState);
+  items.forEach(item=>{
+    const cell=document.createElement('div');
+    cell.className='kanji-cell';
+    const known=!!progress.mastered[item.k];
+    const rd=[item.on?'音 '+item.on:'',item.kun?'訓 '+item.kun:''].filter(Boolean).join(' ');
+    cell.innerHTML=`<span class="spk">🔊</span><span class="kj" lang="ja">${item.k}</span><span class="mn">${item.meaning}</span><span class="rd">${rd}</span>${known?'<span class="check">✓</span>':''}`;
+    cell.addEventListener('click',()=>{
+      speak(item.k,'ja-JP');
+      cell.classList.remove('stamped');void cell.offsetWidth;cell.classList.add('stamped');
+      detail.classList.add('visible');
+      detail.innerHTML=`
+        <div class="kanji-detail-top">
+          <div class="kanji-detail-char" lang="ja">${item.k}</div>
+          <div class="kanji-detail-meta">
+            <h4>${item.meaning}</h4>
+            <p>${formatKanjiReading(item)}</p>
+          </div>
+        </div>
+        <div class="kanji-detail-ex"><strong>Ví dụ:</strong> <span lang="ja">${item.ex.w}</span> (${item.ex.r}) — ${item.ex.m}</div>`;
+      detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+    grid.appendChild(cell);
+  });
+}
+document.getElementById('kanjiToFc').addEventListener('click',()=>{
+  document.querySelectorAll('#fcSetChips .chip').forEach(c=>c.classList.toggle('active',c.dataset.set==='kanji_n5'));
+  switchView('flashcard');updateFcCount();updateFcDirLabels();
+});
+
+/* ===================== FLASHCARD ===================== */
+let fcDirection='kana2romaji';
+let fcDeck=[],fcTotalOriginal=0,fcCurrent=null,fcFlipped=false;
+let fcKnownSet=new Set(),fcFinalUnknown=[],fcSessionXp=0,fcLastSetIds=[];
+
+document.getElementById('fcSetChips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  const active=document.querySelectorAll('#fcSetChips .chip.active');
+  if(b.classList.contains('active')&&active.length===1)return;
+  b.classList.toggle('active');updateFcCount();updateFcDirLabels();
+});
+document.getElementById('fcDirSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  fcDirection=b.dataset.dir;
+  document.querySelectorAll('#fcDirSeg button').forEach(x=>x.classList.toggle('active',x===b));
+});
+function selectedSetIds(){return[...document.querySelectorAll('#fcSetChips .chip.active')].map(c=>c.dataset.set);}
+function selectedHasKanjiOnly(){
+  const ids=selectedSetIds();
+  return ids.length>0&&ids.every(id=>isKanjiSet(id));
+}
+function selectedHasKanji(){return selectedSetIds().some(id=>isKanjiSet(id));}
+function selectedHasKana(){return selectedSetIds().some(id=>!isKanjiSet(id));}
+function updateFcDirLabels(){
+  const kanjiOnly=selectedHasKanjiOnly();
+  const hasKanji=selectedHasKanji();
+  const hasKana=selectedHasKana();
+  const btns=document.querySelectorAll('#fcDirSeg button');
+  const btnK2R=btns[0],btnR2K=btns[1],btnK2Read=document.getElementById('fcDirReading');
+  btnK2Read.style.display=kanjiOnly?'inline-block':'none';
+  if(kanjiOnly){
+    btnK2R.textContent='Kanji → Nghĩa';
+    btnR2K.textContent='Nghĩa → Kanji';
+    if(fcDirection==='kana2romaji'||fcDirection==='romaji2kana'){}
+    else if(fcDirection!=='kanji2reading')fcDirection='kana2romaji';
+  }else if(hasKanji&&hasKana){
+    btnK2R.textContent='Kí tự → Nghĩa/Đọc';
+    btnR2K.textContent='Nghĩa/Đọc → Kí tự';
+    if(fcDirection==='kanji2reading')fcDirection='kana2romaji';
+  }else{
+    btnK2R.textContent='Kí tự → Cách đọc';
+    btnR2K.textContent='Cách đọc → Kí tự';
+    if(fcDirection==='kanji2reading')fcDirection='kana2romaji';
+  }
+  document.querySelectorAll('#fcDirSeg button').forEach(x=>x.classList.toggle('active',x.dataset.dir===fcDirection));
+}
+function updateFcCount(){
+  const ids=selectedSetIds();
+  const count=ids.reduce((sum,id)=>sum+SETS[id].data.length,0);
+  document.getElementById('fcCountText').textContent='Bộ thẻ: '+count+' thẻ';
+}
+updateFcCount();updateFcDirLabels();
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startSessionWith(pool){
+  if(!pool.length){showToast('Hãy chọn ít nhất một bộ kí tự.');return;}
+  fcDeck=shuffle(pool);
+  fcTotalOriginal=fcDeck.length;
+  fcKnownSet=new Set();fcFinalUnknown=[];fcSessionXp=0;
+  fcCombo=0;sessionCardsAnswered=0;
+  document.getElementById('comboDisplay').classList.remove('visible','combo-pulse');
+  document.getElementById('fcSetupPane').style.display='none';
+  document.getElementById('fcSummaryPane').style.display='none';
+  document.getElementById('fcSessionPane').style.display='block';
+  startTimer();nextCard();
+}
+
+document.getElementById('fcStartBtn').addEventListener('click',()=>{
+  const ids=selectedSetIds();fcLastSetIds=ids;
+  let pool=[];
+  ids.forEach(id=>SETS[id].data.forEach(c=>pool.push(cardFromSetItem(id,c))));
+  startSessionWith(pool);
+});
+
+document.getElementById('fcQuickBtn').addEventListener('click',()=>{
+  let pool=[];
+  Object.keys(SETS).forEach(id=>SETS[id].data.forEach(c=>pool.push(cardFromSetItem(id,c))));
+  startSessionWith(shuffle(pool).slice(0,10));
+});
+
+function nextCard(){
+  if(!fcDeck.length){finishSession();return;}
+  fcCurrent=fcDeck.shift();fcFlipped=false;
+  const card=document.getElementById('fcCard');
+  card.style.transition='none';
+  card.classList.remove('flipped','fc-correct','fc-wrong');
+  void card.offsetWidth;
+  card.style.transition='';
+  document.getElementById('fcNoBtn').disabled=true;
+  document.getElementById('fcYesBtn').disabled=true;
+  document.getElementById('fcBackExtra').textContent='';
+  document.getElementById('fcBackEx').textContent='';
+  const conf=SETS[fcCurrent.setId];
+  const isKanji=!!fcCurrent.isKanji;
+  const dir=fcDirection;
+  const isKF=dir==='kana2romaji';
+  const isR2K=dir==='romaji2kana';
+  const isK2Read=dir==='kanji2reading';
+  document.getElementById('fcTagFront').textContent=conf.label;
+  const backTag=isKF?(isKanji?'Nghĩa':'Cách đọc'):isR2K?conf.label:(isKanji?'Cách đọc':'Cách đọc');
+  document.getElementById('fcTagBack').textContent=backTag;
+  const frontEl=document.getElementById('fcFrontChar');
+  const backEl=document.getElementById('fcBackChar');
+  const backExtra=document.getElementById('fcBackExtra');
+  const backEx=document.getElementById('fcBackEx');
+  if(isKanji){
+    if(isKF){
+      frontEl.textContent=fcCurrent.kana;frontEl.setAttribute('lang','ja');frontEl.style.fontFamily='var(--font-kana)';frontEl.style.fontSize='88px';frontEl.style.color='var(--seal)';
+      backEl.textContent=fcCurrent.meaning;backEl.removeAttribute('lang');backEl.style.fontFamily='var(--font-vn)';backEl.style.fontSize='34px';backEl.style.color='var(--paper)';
+      backExtra.textContent=fcCurrent.reading||'';
+      if(fcCurrent.example)backEx.textContent=fcCurrent.example.w+' ('+fcCurrent.example.r+')';
+    }else if(isR2K){
+      frontEl.textContent=fcCurrent.meaning;frontEl.removeAttribute('lang');frontEl.style.fontFamily='var(--font-vn)';frontEl.style.fontSize='34px';frontEl.style.color='var(--seal)';
+      backEl.textContent=fcCurrent.kana;backEl.setAttribute('lang','ja');backEl.style.fontFamily='var(--font-kana)';backEl.style.fontSize='76px';backEl.style.color='var(--paper)';
+      backExtra.textContent=fcCurrent.reading||'';
+      if(fcCurrent.example)backEx.textContent=fcCurrent.example.w+' ('+fcCurrent.example.r+')';
+    }else{
+      frontEl.textContent=fcCurrent.kana;frontEl.setAttribute('lang','ja');frontEl.style.fontFamily='var(--font-kana)';frontEl.style.fontSize='88px';frontEl.style.color='var(--seal)';
+      backEl.textContent=fcCurrent.reading.replace('音: ','').replace(' · 訓: ',' / ');backEl.removeAttribute('lang');backEl.style.fontFamily='var(--font-mono)';backEl.style.fontSize='28px';backEl.style.color='var(--paper)';
+      backExtra.textContent=fcCurrent.meaning;
+      if(fcCurrent.example)backEx.textContent=fcCurrent.example.w+' ('+fcCurrent.example.r+')';
+    }
+    speak(fcCurrent.kana,conf.lang);
+  }else if(isKF){
+    frontEl.textContent=fcCurrent.kana;frontEl.setAttribute('lang','ja');frontEl.style.fontFamily='var(--font-kana)';frontEl.style.fontSize='88px';frontEl.style.color='var(--seal)';
+    backEl.textContent=fcCurrent.romaji;backEl.removeAttribute('lang');backEl.style.fontFamily='var(--font-mono)';backEl.style.fontSize='46px';backEl.style.color='var(--paper)';
+  }else{
+    frontEl.textContent=fcCurrent.romaji;frontEl.removeAttribute('lang');frontEl.style.fontFamily='var(--font-mono)';frontEl.style.fontSize='46px';frontEl.style.color='var(--seal)';
+    backEl.textContent=fcCurrent.kana;backEl.setAttribute('lang','ja');backEl.style.fontFamily='var(--font-kana)';backEl.style.fontSize='76px';backEl.style.color='var(--paper)';
+  }
+  updateProgressUI();
+}
+
+function updateProgressUI(){
+  const done=fcKnownSet.size+fcFinalUnknown.length;
+  const pct=fcTotalOriginal?Math.round(done/fcTotalOriginal*100):0;
+  const remain=fcDeck.length+(fcCurrent?1:0);
+  document.getElementById('fcProgressFill').style.width=pct+'%';
+  document.getElementById('fcProgressLabel').textContent=done+' / '+fcTotalOriginal;
+  document.getElementById('fcRemainLabel').textContent=remain?'Còn '+remain+' thẻ':'';
+  document.getElementById('fcSessionXp').textContent='+'+fcSessionXp+' XP';
+}
+
+document.getElementById('fcCard').addEventListener('click',flipCard);
+function flipCard(){
+  if(!fcCurrent)return;
+  fcFlipped=!fcFlipped;
+  document.getElementById('fcCard').classList.toggle('flipped',fcFlipped);
+  document.getElementById('fcNoBtn').disabled=!fcFlipped;
+  document.getElementById('fcYesBtn').disabled=!fcFlipped;
+  if(fcFlipped)playSound('flip');
+}
+
+document.getElementById('fcYesBtn').addEventListener('click',()=>answer(true));
+document.getElementById('fcNoBtn').addEventListener('click',()=>answer(false));
+
+function answer(known){
+  if(!fcFlipped||!fcCurrent)return;
+  document.getElementById('fcNoBtn').disabled=true;
+  document.getElementById('fcYesBtn').disabled=true;
+  updateCombo(known);
+  const card=document.getElementById('fcCard');
+  card.classList.add(known?'fc-correct':'fc-wrong');
+  playSound(known?'correct':'wrong');
+  const gained=markResult(fcCurrent.kana,known);
+  sessionCardsAnswered++;
+  if(known){
+    fcKnownSet.add(fcCurrent.kana);fcSessionXp+=gained;
+    if(gained>0)setTimeout(()=>spawnXpFloat(gained),80);
+  }else{
+    fcKnownSet.delete(fcCurrent.kana);
+    fcCurrent.missCount=(fcCurrent.missCount||0)+1;
+    if(fcCurrent.missCount<2){const pos=Math.min(fcDeck.length,3+Math.floor(Math.random()*3));fcDeck.splice(pos,0,fcCurrent);}
+    else{fcFinalUnknown.push(fcCurrent);}
+  }
+  updateProgressUI();renderStats();
+  setTimeout(()=>{nextCard();},known?400:580);
+}
+
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('fcSessionPane').style.display==='none')return;
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();flipCard();}
+  else if(e.key==='ArrowRight'&&fcFlipped){answer(true);}
+  else if(e.key==='ArrowLeft'&&fcFlipped){answer(false);}
+});
+
+function finishSession(){
+  stopTimer();
+  const known=fcKnownSet.size;
+  const accuracy=fcTotalOriginal?Math.round(known/fcTotalOriginal*100):0;
+  const stars=accuracy>=80?3:accuracy>=60?2:accuracy>=40?1:0;
+  document.getElementById('fcSessionPane').style.display='none';
+  document.getElementById('fcSummaryPane').style.display='block';
+  document.getElementById('sumStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
+  document.getElementById('sumTitle').textContent=stars>=3?'🎊 Xuất sắc!':stars>=2?'👍 Tốt lắm!':stars>=1?'💪 Cố lên!':'😅 Thử lại nhé!';
+  document.getElementById('sumAccuracy').textContent='Độ chính xác: '+accuracy+'%';
+  document.getElementById('sumKnown').textContent=known;
+  document.getElementById('sumUnknown').textContent=fcFinalUnknown.length;
+  document.getElementById('sumXp').textContent=fcSessionXp;
+  document.getElementById('sumTotal').textContent=fcTotalOriginal;
+  addDailyCount(sessionCardsAnswered);
+  renderDailyRing();renderStats();renderPath();
+  if(stars>=2){setTimeout(launchConfetti,150);playSound('complete');}
+}
+
+document.getElementById('sumRestart').addEventListener('click',()=>{
+  document.getElementById('fcSetupPane').style.display='block';
+  document.getElementById('fcSummaryPane').style.display='none';
+});
+document.getElementById('sumRetryUnknown').addEventListener('click',()=>{
+  if(!fcFinalUnknown.length){showToast('Bạn không còn thẻ nào cần ôn lại 🎉');return;}
+  startSessionWith(fcFinalUnknown.map(c=>({...c,missCount:0})));
+});
+
+/* ===================== QUIZ ===================== */
+const QUIZ_STORAGE_KEY='masu_quiz_v1';
+let quizStats=loadQuizStats();
+function loadQuizStats(){
+  try{const r=localStorage.getItem(QUIZ_STORAGE_KEY);if(r)return JSON.parse(r);}catch(e){}
+  return{sessions:0,totalCorrect:0,totalAnswered:0,bestAccuracy:0,bestStreak:0,lastScore:0};
+}
+function saveQuizStats(){try{localStorage.setItem(QUIZ_STORAGE_KEY,JSON.stringify(quizStats));}catch(e){}}
+
+let quizType='mixed',quizCount=15;
+let quizQuestions=[],quizIndex=0,quizCorrect=0,quizStreak=0,quizBestStreak=0,quizSessionXp=0,quizCombo=0,quizAnswered=0,quizTimerInterval=null;
+
+document.getElementById('quizSetChips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  const active=document.querySelectorAll('#quizSetChips .chip.active');
+  if(b.classList.contains('active')&&active.length===1)return;
+  b.classList.toggle('active');updateQuizPoolText();
+});
+document.getElementById('quizTypeSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  quizType=b.dataset.qtype;
+  document.querySelectorAll('#quizTypeSeg button').forEach(x=>x.classList.toggle('active',x===b));
+  updateQuizPoolText();
+});
+document.getElementById('quizCountChips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  quizCount=parseInt(b.dataset.count,10);
+  document.querySelectorAll('#quizCountChips .chip').forEach(x=>x.classList.toggle('active',x===b));
+  updateQuizPoolText();
+});
+
+function quizSelectedSetIds(){return[...document.querySelectorAll('#quizSetChips .chip.active')].map(c=>c.dataset.set);}
+
+function getQuizPoolItems(){
+  const items=[];
+  quizSelectedSetIds().forEach(id=>{
+    SETS[id].data.forEach(c=>{
+      if(isKanjiSet(id)){
+        items.push({kind:'kanji',k:c.k,meaning:c.meaning,reading:formatKanjiReading(c),on:c.on,kun:c.kun,setId:id,lang:'ja-JP'});
+      }else{
+        items.push({kind:'kana',k:c.k,romaji:c.r,setId:id,lang:SETS[id].lang});
+      }
+    });
+  });
+  return items;
+}
+
+function availableQuizTypes(pool){
+  const types=[];
+  if(pool.some(i=>i.kind==='kanji')){types.push('kanji_meaning','kanji_reading');}
+  if(pool.some(i=>i.kind==='kana'))types.push('kana_romaji');
+  return types;
+}
+
+function pickQuizType(pool){
+  const types=availableQuizTypes(pool);
+  if(!types.length)return null;
+  if(quizType==='mixed')return types[Math.floor(Math.random()*types.length)];
+  return types.includes(quizType)?quizType:types[0];
+}
+
+function kanjiReadingShort(item){
+  if(item.kun)return item.kun.replace(/\([^)]*\)/g,'').split('、')[0];
+  if(item.on)return item.on.split('、')[0];
+  return item.reading;
+}
+
+function buildQuestion(item,qtype,pool){
+  let prompt='',sub='',correct='',distractorPool=[],promptClass='',lang='';
+  if(qtype==='kanji_meaning'){
+    prompt=item.k;sub='Chọn nghĩa tiếng Việt đúng';correct=item.meaning;
+    distractorPool=pool.filter(x=>x.kind==='kanji'&&x.k!==item.k).map(x=>x.meaning);
+    lang='ja';
+  }else if(qtype==='kanji_reading'){
+    prompt=item.k;sub='Chọn cách đọc đúng';correct=kanjiReadingShort(item);
+    distractorPool=pool.filter(x=>x.kind==='kanji'&&x.k!==item.k).map(x=>kanjiReadingShort(x));
+    lang='ja';
+  }else{
+    prompt=item.k;sub='Chọn cách đọc romaji đúng';correct=item.romaji;
+    distractorPool=pool.filter(x=>x.kind==='kana'&&x.k!==item.k).map(x=>x.romaji);
+    lang='ja';
+  }
+  const unique=new Set([correct]);
+  const wrong=[];
+  const shuffled=shuffle(distractorPool);
+  for(const d of shuffled){if(!unique.has(d)&&d){unique.add(d);wrong.push(d);if(wrong.length>=3)break;}}
+  while(wrong.length<3){
+    const filler=pool[Math.floor(Math.random()*pool.length)];
+    const val=qtype==='kanji_meaning'?filler.meaning:qtype==='kanji_reading'?(filler.kind==='kanji'?kanjiReadingShort(filler):''):filler.romaji;
+    if(val&&!unique.has(val)){unique.add(val);wrong.push(val);}
+    if(unique.size>20)break;
+  }
+  const options=shuffle([correct,...wrong.slice(0,3)]);
+  const labels={kanji_meaning:'Kanji → Nghĩa',kanji_reading:'Kanji → Đọc',kana_romaji:'Kana → Đọc'};
+  return{qtype,prompt,sub,correct,options,item,tag:labels[qtype],promptClass,lang};
+}
+
+function buildQuizSession(count){
+  const pool=getQuizPoolItems();
+  if(pool.length<4){showToast('Cần ít nhất 4 kí tự trong bộ đã chọn.');return null;}
+  const types=availableQuizTypes(pool);
+  if(!types.length){showToast('Bộ đã chọn không phù hợp loại câu hỏi.');return null;}
+  const effectiveType=quizType==='mixed'?null:(types.includes(quizType)?quizType:null);
+  if(quizType!=='mixed'&&!effectiveType){showToast('Loại câu hỏi không khớp bộ đã chọn — hãy chọn bộ khác hoặc Hỗn hợp.');return null;}
+  const maxQ=Math.min(count,pool.length*2);
+  const questions=[];
+  const used=new Set();
+  let guard=0;
+  while(questions.length<maxQ&&guard<maxQ*8){
+    guard++;
+    const item=pool[Math.floor(Math.random()*pool.length)];
+    const qtype=effectiveType||pickQuizType([item]);
+    if(!qtype)continue;
+    const key=item.k+'|'+qtype;
+    if(used.has(key)&&used.size<pool.length*2)continue;
+    const q=buildQuestion(item,qtype,pool);
+    if(q.options.length<4)continue;
+    used.add(key);
+    questions.push(q);
+  }
+  if(questions.length<Math.min(4,count)){showToast('Không đủ dữ liệu để tạo câu hỏi — thử thêm bộ kí tự.');return null;}
+  return questions;
+}
+
+function updateQuizPoolText(){
+  const pool=getQuizPoolItems();
+  const types=availableQuizTypes(pool);
+  let typeNote='';
+  if(quizType!=='mixed'&&!types.includes(quizType))typeNote=' · loại câu không khớp bộ';
+  document.getElementById('quizPoolText').textContent='Có thể tạo: tối đa '+Math.min(quizCount,Math.max(pool.length,4))+' câu · '+pool.length+' kí tự'+typeNote;
+  renderQuizHistory();
+}
+
+function renderQuizHistory(){
+  const el=document.getElementById('quizHistoryText');
+  if(!quizStats.sessions){el.textContent='';return;}
+  el.textContent='Lịch sử: '+quizStats.sessions+' buổi · trung bình '+Math.round(quizStats.totalCorrect/Math.max(quizStats.totalAnswered,1)*100)+'% · kỷ lục '+quizStats.bestAccuracy+'% · chuỗi cao nhất '+quizStats.bestStreak;
+}
+
+function showQuizPane(pane){
+  document.getElementById('quizSetupPane').style.display=pane==='setup'?'block':'none';
+  document.getElementById('quizSessionPane').style.display=pane==='session'?'block':'none';
+  document.getElementById('quizSummaryPane').style.display=pane==='summary'?'block':'none';
+}
+
+function startQuizSession(count){
+  const qs=buildQuizSession(count);
+  if(!qs)return;
+  quizQuestions=qs;quizIndex=0;quizCorrect=0;quizStreak=0;quizBestStreak=0;quizSessionXp=0;quizCombo=0;quizAnswered=0;
+  document.getElementById('quizComboDisplay').classList.remove('visible','combo-pulse');
+  showQuizPane('session');
+  quizTimerStart();
+  renderQuizQuestion();
+}
+
+function quizTimerStart(){
+  const start=Date.now();
+  clearInterval(quizTimerInterval);
+  quizTimerInterval=setInterval(()=>{
+    const sec=Math.floor((Date.now()-start)/1000);
+    document.getElementById('quizTimer').textContent=Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0');
+  },1000);
+}
+function quizTimerStop(){clearInterval(quizTimerInterval);quizTimerInterval=null;}
+
+function updateQuizProgressUI(){
+  const total=quizQuestions.length;
+  const done=quizIndex;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('quizProgressFill').style.width=pct+'%';
+  document.getElementById('quizProgressLabel').textContent=done+' / '+total;
+  document.getElementById('quizScoreLabel').textContent=quizCorrect;
+  document.getElementById('quizStreakLabel').textContent=quizStreak;
+  document.getElementById('quizSessionXp').textContent='+'+quizSessionXp+' XP';
+  const streakChip=document.getElementById('quizStreakChip');
+  streakChip.classList.toggle('hot',quizStreak>=3);
+}
+
+function renderQuizQuestion(){
+  if(quizIndex>=quizQuestions.length){finishQuiz();return;}
+  const q=quizQuestions[quizIndex];
+  const card=document.getElementById('quizQuestionCard');
+  card.classList.remove('q-correct','q-wrong');
+  document.getElementById('quizQTag').textContent=q.tag;
+  const promptEl=document.getElementById('quizQPrompt');
+  promptEl.textContent=q.prompt;
+  promptEl.className='quiz-q-prompt'+(q.promptClass?' '+q.promptClass:'');
+  if(q.lang)promptEl.setAttribute('lang',q.lang);else promptEl.removeAttribute('lang');
+  document.getElementById('quizQSub').textContent=q.sub;
+  document.getElementById('quizFeedback').textContent='';
+  document.getElementById('quizFeedback').className='quiz-feedback';
+  const optsEl=document.getElementById('quizOptions');
+  optsEl.innerHTML='';
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='quiz-opt';
+    btn.dataset.index=String(i);
+    btn.innerHTML='<span class="opt-key">'+(i+1)+'</span><span class="opt-text"></span>';
+    btn.querySelector('.opt-text').textContent=opt;
+    btn.addEventListener('click',()=>answerQuiz(i));
+    optsEl.appendChild(btn);
+  });
+  updateQuizProgressUI();
+  if(q.item&&q.item.k)speak(q.item.k,q.item.lang||'ja-JP');
+}
+
+function answerQuiz(selectedIdx){
+  const q=quizQuestions[quizIndex];
+  const opts=document.querySelectorAll('#quizOptions .quiz-opt');
+  if(!opts.length||opts[0].disabled)return;
+  const correctIdx=q.options.indexOf(q.correct);
+  const isCorrect=selectedIdx===correctIdx;
+  opts.forEach((btn,i)=>{
+    btn.disabled=true;
+    btn.classList.add('reveal');
+    if(i===correctIdx)btn.classList.add('correct');
+    else if(i===selectedIdx&&!isCorrect)btn.classList.add('wrong');
+  });
+  const card=document.getElementById('quizQuestionCard');
+  card.classList.add(isCorrect?'q-correct':'q-wrong');
+  const fb=document.getElementById('quizFeedback');
+  fb.className='quiz-feedback '+(isCorrect?'ok':'bad');
+  fb.textContent=isCorrect?'Chính xác!':'Sai rồi — đáp án: '+q.correct;
+  playSound(isCorrect?'correct':'wrong');
+  quizAnswered++;
+  if(isCorrect){
+    quizCorrect++;quizStreak++;quizBestStreak=Math.max(quizBestStreak,quizStreak);
+    quizCombo++;
+    if(quizCombo>=3){
+      const el=document.getElementById('quizComboDisplay');
+      document.getElementById('quizComboNum').textContent=quizCombo;
+      el.classList.add('visible');
+      el.classList.remove('combo-pulse');
+      void el.offsetWidth;
+      el.classList.add('combo-pulse');
+      if(quizCombo%5===0)playSound('combo');
+    }
+    const mult=quizCombo>=8?4:quizCombo>=5?3:quizCombo>=3?2:1;
+    const earned=Math.round(5*mult);
+    progress.xp+=earned;quizSessionXp+=earned;
+    progress.mastered[q.item.k]=true;
+    saveProgress();
+  }else{
+    quizStreak=0;quizCombo=0;
+    document.getElementById('quizComboDisplay').classList.remove('visible','combo-pulse');
+  }
+  updateQuizProgressUI();renderStats();
+  quizIndex++;
+  setTimeout(()=>renderQuizQuestion(),isCorrect?650:900);
+}
+
+function finishQuiz(){
+  quizTimerStop();
+  const total=quizQuestions.length;
+  const accuracy=total?Math.round(quizCorrect/total*100):0;
+  const stars=accuracy>=90?3:accuracy>=70?2:accuracy>=50?1:0;
+  quizStats.sessions++;
+  quizStats.totalCorrect+=quizCorrect;
+  quizStats.totalAnswered+=total;
+  quizStats.lastScore=accuracy;
+  if(accuracy>quizStats.bestAccuracy)quizStats.bestAccuracy=accuracy;
+  if(quizBestStreak>quizStats.bestStreak)quizStats.bestStreak=quizBestStreak;
+  saveQuizStats();
+  touchStreak();
+  addDailyCount(quizAnswered);
+  showQuizPane('summary');
+  document.getElementById('quizSumStars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
+  document.getElementById('quizSumTitle').textContent=stars>=3?'🎊 Xuất sắc!':stars>=2?'👍 Tốt lắm!':stars>=1?'💪 Cố lên!':'😅 Thử lại nhé!';
+  document.getElementById('quizSumScore').textContent=accuracy+'%';
+  document.getElementById('quizSumAccuracy').textContent=quizCorrect+' / '+total+' câu đúng';
+  document.getElementById('quizSumCorrect').textContent=quizCorrect;
+  document.getElementById('quizSumBestStreak').textContent=quizBestStreak;
+  document.getElementById('quizSumXp').textContent=quizSessionXp;
+  document.getElementById('quizSumBest').textContent=quizStats.bestAccuracy+'%';
+  renderDailyRing();renderStats();renderPath();renderQuizHistory();
+  if(stars>=2){setTimeout(launchConfetti,150);playSound('complete');}
+}
+
+document.getElementById('quizStartBtn').addEventListener('click',()=>startQuizSession(quizCount));
+document.getElementById('quizQuickBtn').addEventListener('click',()=>startQuizSession(5));
+document.getElementById('quizSumRetry').addEventListener('click',()=>startQuizSession(quizQuestions.length||quizCount));
+document.getElementById('quizSumSetup').addEventListener('click',()=>showQuizPane('setup'));
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('quizSessionPane').style.display==='none')return;
+  const opts=document.querySelectorAll('#quizOptions .quiz-opt:not(:disabled)');
+  if(!opts.length||opts[0].disabled)return;
+  const n=parseInt(e.key,10);
+  if(n>=1&&n<=4){e.preventDefault();answerQuiz(n-1);}
+});
+
+updateQuizPoolText();
+
+/* ===================== INIT ===================== */
+renderStats();renderPath();renderAlphabet();renderKanji();renderDailyRing();
+
+})();
+</script>
+</body>
+</html>
